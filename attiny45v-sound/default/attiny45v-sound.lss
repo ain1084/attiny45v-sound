@@ -1,0 +1,3444 @@
+
+attiny45v-sound.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000fd2  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000008  00800060  00000fd2  00001066  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000012  00800068  00800068  0000106e  2**0
+                  ALLOC
+  3 .debug_aranges 00000120  00000000  00000000  00001070  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_pubnames 0000032a  00000000  00000000  00001190  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000017f1  00000000  00000000  000014ba  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000007d7  00000000  00000000  00002cab  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000da1  00000000  00000000  00003482  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000240  00000000  00000000  00004224  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000070c  00000000  00000000  00004464  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000006ec  00000000  00000000  00004b70  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000060  00000000  00000000  0000525c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	1a c0       	rjmp	.+52     	; 0x36 <__dtors_end>
+   2:	3e c0       	rjmp	.+124    	; 0x80 <__bad_interrupt>
+   4:	3e c0       	rjmp	.+124    	; 0x82 <__vector_2>
+   6:	3c c0       	rjmp	.+120    	; 0x80 <__bad_interrupt>
+   8:	3b c0       	rjmp	.+118    	; 0x80 <__bad_interrupt>
+   a:	3a c0       	rjmp	.+116    	; 0x80 <__bad_interrupt>
+   c:	39 c0       	rjmp	.+114    	; 0x80 <__bad_interrupt>
+   e:	38 c0       	rjmp	.+112    	; 0x80 <__bad_interrupt>
+  10:	37 c0       	rjmp	.+110    	; 0x80 <__bad_interrupt>
+  12:	36 c0       	rjmp	.+108    	; 0x80 <__bad_interrupt>
+  14:	39 c1       	rjmp	.+626    	; 0x288 <__vector_10>
+  16:	34 c0       	rjmp	.+104    	; 0x80 <__bad_interrupt>
+  18:	35 c0       	rjmp	.+106    	; 0x84 <__vector_12>
+  1a:	32 c0       	rjmp	.+100    	; 0x80 <__bad_interrupt>
+  1c:	31 c0       	rjmp	.+98     	; 0x80 <__bad_interrupt>
+
+0000001e <_ZL11fourCC_RIFF>:
+  1e:	52 49 46 46                                         RIFF
+
+00000022 <_ZL11fourCC_WAVE>:
+  22:	57 41 56 45                                         WAVE
+
+00000026 <_ZL10fourCC_FMT>:
+  26:	66 6d 74 20                                         fmt 
+
+0000002a <_ZL11fourCC_FACT>:
+  2a:	66 61 63 74                                         fact
+
+0000002e <_ZL11fourCC_DATA>:
+  2e:	64 61 74 61                                         data
+
+00000032 <__ctors_start>:
+  32:	78 00       	.word	0x0078	; ????
+
+00000034 <__ctors_end>:
+  34:	72 00       	.word	0x0072	; ????
+
+00000036 <__dtors_end>:
+  36:	11 24       	eor	r1, r1
+  38:	1f be       	out	0x3f, r1	; 63
+  3a:	cf e5       	ldi	r28, 0x5F	; 95
+  3c:	d1 e0       	ldi	r29, 0x01	; 1
+  3e:	de bf       	out	0x3e, r29	; 62
+  40:	cd bf       	out	0x3d, r28	; 61
+
+00000042 <__do_copy_data>:
+  42:	10 e0       	ldi	r17, 0x00	; 0
+  44:	a0 e6       	ldi	r26, 0x60	; 96
+  46:	b0 e0       	ldi	r27, 0x00	; 0
+  48:	e2 ed       	ldi	r30, 0xD2	; 210
+  4a:	ff e0       	ldi	r31, 0x0F	; 15
+  4c:	02 c0       	rjmp	.+4      	; 0x52 <.do_copy_data_start>
+
+0000004e <.do_copy_data_loop>:
+  4e:	05 90       	lpm	r0, Z+
+  50:	0d 92       	st	X+, r0
+
+00000052 <.do_copy_data_start>:
+  52:	a8 36       	cpi	r26, 0x68	; 104
+  54:	b1 07       	cpc	r27, r17
+  56:	d9 f7       	brne	.-10     	; 0x4e <.do_copy_data_loop>
+
+00000058 <__do_clear_bss>:
+  58:	10 e0       	ldi	r17, 0x00	; 0
+  5a:	a8 e6       	ldi	r26, 0x68	; 104
+  5c:	b0 e0       	ldi	r27, 0x00	; 0
+  5e:	01 c0       	rjmp	.+2      	; 0x62 <.do_clear_bss_start>
+
+00000060 <.do_clear_bss_loop>:
+  60:	1d 92       	st	X+, r1
+
+00000062 <.do_clear_bss_start>:
+  62:	aa 37       	cpi	r26, 0x7A	; 122
+  64:	b1 07       	cpc	r27, r17
+  66:	e1 f7       	brne	.-8      	; 0x60 <.do_clear_bss_loop>
+
+00000068 <__do_global_ctors>:
+  68:	10 e0       	ldi	r17, 0x00	; 0
+  6a:	c4 e3       	ldi	r28, 0x34	; 52
+  6c:	d0 e0       	ldi	r29, 0x00	; 0
+  6e:	03 c0       	rjmp	.+6      	; 0x76 <.do_global_ctors_start>
+
+00000070 <.do_global_ctors_loop>:
+  70:	22 97       	sbiw	r28, 0x02	; 2
+  72:	fe 01       	movw	r30, r28
+  74:	99 d6       	rcall	.+3378   	; 0xda8 <__tablejump__>
+
+00000076 <.do_global_ctors_start>:
+  76:	c2 33       	cpi	r28, 0x32	; 50
+  78:	d1 07       	cpc	r29, r17
+  7a:	d1 f7       	brne	.-12     	; 0x70 <.do_global_ctors_loop>
+  7c:	3f d0       	rcall	.+126    	; 0xfc <main>
+  7e:	9d c7       	rjmp	.+3898   	; 0xfba <__do_global_dtors>
+
+00000080 <__bad_interrupt>:
+  80:	bf cf       	rjmp	.-130    	; 0x0 <__vectors>
+
+00000082 <__vector_2>:
+ISR(TIMER0_COMPA_vect)
+{
+	g_player.Timer();
+}
+
+EMPTY_INTERRUPT(PCINT0_vect)
+  82:	18 95       	reti
+
+00000084 <__vector_12>:
+
+ISR(WDT_vect)
+  84:	1f 92       	push	r1
+  86:	0f 92       	push	r0
+  88:	0f b6       	in	r0, 0x3f	; 63
+  8a:	0f 92       	push	r0
+  8c:	11 24       	eor	r1, r1
+  8e:	8f 93       	push	r24
+  90:	9f 93       	push	r25
+{
+	++g_randx;
+  92:	80 91 74 00 	lds	r24, 0x0074
+  96:	90 91 75 00 	lds	r25, 0x0075
+  9a:	01 96       	adiw	r24, 0x01	; 1
+  9c:	90 93 75 00 	sts	0x0075, r25
+  a0:	80 93 74 00 	sts	0x0074, r24
+	MCUSR &= ~_BV(WDRF);
+  a4:	84 b7       	in	r24, 0x34	; 52
+  a6:	87 7f       	andi	r24, 0xF7	; 247
+  a8:	84 bf       	out	0x34, r24	; 52
+}
+  aa:	9f 91       	pop	r25
+  ac:	8f 91       	pop	r24
+  ae:	0f 90       	pop	r0
+  b0:	0f be       	out	0x3f, r0	; 63
+  b2:	0f 90       	pop	r0
+  b4:	1f 90       	pop	r1
+  b6:	18 95       	reti
+
+000000b8 <_Z41__static_initialization_and_destruction_0ii>:
+		if (getPinTrigger())
+		{
+			randomPlay();
+		}
+	}
+}
+  b8:	81 30       	cpi	r24, 0x01	; 1
+  ba:	91 05       	cpc	r25, r1
+  bc:	51 f4       	brne	.+20     	; 0xd2 <_Z41__static_initialization_and_destruction_0ii+0x1a>
+  be:	6f 5f       	subi	r22, 0xFF	; 255
+  c0:	7f 4f       	sbci	r23, 0xFF	; 255
+  c2:	79 f4       	brne	.+30     	; 0xe2 <_Z41__static_initialization_and_destruction_0ii+0x2a>
+	PinState_Unknown,
+	PinState_Low,
+	PinState_High,
+};
+
+static PlayController g_player;
+  c4:	88 e6       	ldi	r24, 0x68	; 104
+  c6:	90 e0       	ldi	r25, 0x00	; 0
+  c8:	4e d5       	rcall	.+2716   	; 0xb66 <_ZN14PlayControllerC1Ev>
+static SPIStream g_stream;
+  ca:	8f e6       	ldi	r24, 0x6F	; 111
+  cc:	90 e0       	ldi	r25, 0x00	; 0
+  ce:	ad d4       	rcall	.+2394   	; 0xa2a <_ZN9SPIStreamC1Ev>
+  d0:	08 95       	ret
+  d2:	89 2b       	or	r24, r25
+  d4:	31 f4       	brne	.+12     	; 0xe2 <_Z41__static_initialization_and_destruction_0ii+0x2a>
+  d6:	6f 5f       	subi	r22, 0xFF	; 255
+  d8:	7f 4f       	sbci	r23, 0xFF	; 255
+  da:	19 f4       	brne	.+6      	; 0xe2 <_Z41__static_initialization_and_destruction_0ii+0x2a>
+	PinState_Unknown,
+	PinState_Low,
+	PinState_High,
+};
+
+static PlayController g_player;
+  dc:	88 e6       	ldi	r24, 0x68	; 104
+  de:	90 e0       	ldi	r25, 0x00	; 0
+  e0:	a6 d5       	rcall	.+2892   	; 0xc2e <_ZN14PlayControllerD1Ev>
+  e2:	08 95       	ret
+
+000000e4 <_GLOBAL__D___vector_10>:
+		if (getPinTrigger())
+		{
+			randomPlay();
+		}
+	}
+}
+  e4:	80 e0       	ldi	r24, 0x00	; 0
+  e6:	90 e0       	ldi	r25, 0x00	; 0
+  e8:	6f ef       	ldi	r22, 0xFF	; 255
+  ea:	7f ef       	ldi	r23, 0xFF	; 255
+  ec:	e5 df       	rcall	.-54     	; 0xb8 <_Z41__static_initialization_and_destruction_0ii>
+  ee:	08 95       	ret
+
+000000f0 <_GLOBAL__I___vector_10>:
+  f0:	81 e0       	ldi	r24, 0x01	; 1
+  f2:	90 e0       	ldi	r25, 0x00	; 0
+  f4:	6f ef       	ldi	r22, 0xFF	; 255
+  f6:	7f ef       	ldi	r23, 0xFF	; 255
+  f8:	df df       	rcall	.-66     	; 0xb8 <_Z41__static_initialization_and_destruction_0ii>
+  fa:	08 95       	ret
+
+000000fc <main>:
+	g_prevNumber = number;
+	uint32_t address = getEntryAddress(number);
+	g_player.Play(&g_stream, address);
+}
+
+int main()
+  fc:	ef 92       	push	r14
+  fe:	ff 92       	push	r15
+ 100:	0f 93       	push	r16
+ 102:	1f 93       	push	r17
+ 104:	cf 93       	push	r28
+ 106:	df 93       	push	r29
+ 108:	8c e6       	ldi	r24, 0x6C	; 108
+ 10a:	92 e0       	ldi	r25, 0x02	; 2
+	__asm__ volatile (
+		"1: sbiw %0,1" "\n\t"
+		"brne 1b"
+		: "=w" (__count)
+		: "0" (__count)
+	);
+ 10c:	20 e9       	ldi	r18, 0x90	; 144
+ 10e:	31 e0       	ldi	r19, 0x01	; 1
+ 110:	f9 01       	movw	r30, r18
+ 112:	31 97       	sbiw	r30, 0x01	; 1
+ 114:	f1 f7       	brne	.-4      	; 0x112 <main+0x16>
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+ 116:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+ 118:	d9 f7       	brne	.-10     	; 0x110 <main+0x14>
+	MCUSR &= ~_BV(WDRF);
+}
+
+static void initializePinState()
+{
+	g_pinState = (PINB & _BV(PB5)) ? PinState_High : PinState_Low;
+ 11a:	b5 99       	sbic	0x16, 5	; 22
+ 11c:	02 c0       	rjmp	.+4      	; 0x122 <main+0x26>
+ 11e:	81 e0       	ldi	r24, 0x01	; 1
+ 120:	01 c0       	rjmp	.+2      	; 0x124 <main+0x28>
+ 122:	82 e0       	ldi	r24, 0x02	; 2
+ 124:	80 93 73 00 	sts	0x0073, r24
+{
+	_delay_ms(500 / 8);	// wait 1sec
+	initializePinState();
+
+	//pin-change interrupt
+	PCMSK |= _BV(PCINT5);
+ 128:	ad 9a       	sbi	0x15, 5	; 21
+	GIMSK |= _BV(PCIE);
+ 12a:	8b b7       	in	r24, 0x3b	; 59
+ 12c:	80 62       	ori	r24, 0x20	; 32
+ 12e:	8b bf       	out	0x3b, r24	; 59
+
+	DDRB &= ~_BV(PB5);
+ 130:	bd 98       	cbi	0x17, 5	; 23
+	PORTB |= _BV(PB5);
+ 132:	c5 9a       	sbi	0x18, 5	; 24
+
+	ACSR |= _BV(ACD);
+ 134:	47 9a       	sbi	0x08, 7	; 8
+	PRR |= _BV(PRADC)|_BV(PRTIM1)|_BV(PRTIM0)|_BV(PRUSI);
+ 136:	80 b5       	in	r24, 0x20	; 32
+ 138:	8f 60       	ori	r24, 0x0F	; 15
+ 13a:	80 bd       	out	0x20, r24	; 32
+	MCUCR |= _BV(BODS)|_BV(SE);
+ 13c:	85 b7       	in	r24, 0x35	; 53
+ 13e:	80 6a       	ori	r24, 0xA0	; 160
+ 140:	85 bf       	out	0x35, r24	; 53
+
+	sei();
+ 142:	78 94       	sei
+		default:
+			//enter power down mode
+			g_player.Sleep();
+			g_stream.Sleep();
+			set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+			wdt_disable();
+ 144:	e8 e1       	ldi	r30, 0x18	; 24
+ 146:	fe 2e       	mov	r15, r30
+			sleep_mode();
+			set_sleep_mode(SLEEP_MODE_IDLE);
+			WDTCR = _BV(WDCE)|_BV(WDE);
+			WDTCR = _BV(WDIE)|_BV(WDP2)|_BV(WDP0);	// 0.5sec
+ 148:	75 e4       	ldi	r23, 0x45	; 69
+ 14a:	e7 2e       	mov	r14, r23
+ 14c:	00 e4       	ldi	r16, 0x40	; 64
+ 14e:	1c e9       	ldi	r17, 0x9C	; 156
+	// for test when debugWire
+//	randomPlay();
+
+	for (;;)
+	{
+		PlayController::State state = g_player.GetState();
+ 150:	88 e6       	ldi	r24, 0x68	; 104
+ 152:	90 e0       	ldi	r25, 0x00	; 0
+ 154:	10 d5       	rcall	.+2592   	; 0xb76 <_ZNK14PlayController8GetStateEv>
+		switch (state)
+ 156:	81 50       	subi	r24, 0x01	; 1
+ 158:	82 30       	cpi	r24, 0x02	; 2
+ 15a:	40 f4       	brcc	.+16     	; 0x16c <__stack+0xd>
+		{
+		case PlayController::State_Play:
+		case PlayController::State_End:
+			sleep_mode();
+ 15c:	85 b7       	in	r24, 0x35	; 53
+ 15e:	80 62       	ori	r24, 0x20	; 32
+ 160:	85 bf       	out	0x35, r24	; 53
+ 162:	88 95       	sleep
+ 164:	85 b7       	in	r24, 0x35	; 53
+ 166:	8f 7d       	andi	r24, 0xDF	; 223
+ 168:	85 bf       	out	0x35, r24	; 53
+ 16a:	1b c0       	rjmp	.+54     	; 0x1a2 <__stack+0x43>
+			break;
+		default:
+			//enter power down mode
+			g_player.Sleep();
+ 16c:	88 e6       	ldi	r24, 0x68	; 104
+ 16e:	90 e0       	ldi	r25, 0x00	; 0
+ 170:	14 d5       	rcall	.+2600   	; 0xb9a <_ZN14PlayController5SleepEv>
+			g_stream.Sleep();
+ 172:	8f e6       	ldi	r24, 0x6F	; 111
+ 174:	90 e0       	ldi	r25, 0x00	; 0
+ 176:	67 d4       	rcall	.+2254   	; 0xa46 <_ZN9SPIStream5SleepEv>
+			set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+ 178:	85 b7       	in	r24, 0x35	; 53
+ 17a:	87 7e       	andi	r24, 0xE7	; 231
+ 17c:	80 61       	ori	r24, 0x10	; 16
+ 17e:	85 bf       	out	0x35, r24	; 53
+			wdt_disable();
+ 180:	0f b6       	in	r0, 0x3f	; 63
+ 182:	f8 94       	cli
+ 184:	f1 bc       	out	0x21, r15	; 33
+ 186:	11 bc       	out	0x21, r1	; 33
+ 188:	0f be       	out	0x3f, r0	; 63
+			sleep_mode();
+ 18a:	85 b7       	in	r24, 0x35	; 53
+ 18c:	80 62       	ori	r24, 0x20	; 32
+ 18e:	85 bf       	out	0x35, r24	; 53
+ 190:	88 95       	sleep
+ 192:	85 b7       	in	r24, 0x35	; 53
+ 194:	8f 7d       	andi	r24, 0xDF	; 223
+ 196:	85 bf       	out	0x35, r24	; 53
+			set_sleep_mode(SLEEP_MODE_IDLE);
+ 198:	85 b7       	in	r24, 0x35	; 53
+ 19a:	87 7e       	andi	r24, 0xE7	; 231
+ 19c:	85 bf       	out	0x35, r24	; 53
+			WDTCR = _BV(WDCE)|_BV(WDE);
+ 19e:	f1 bc       	out	0x21, r15	; 33
+			WDTCR = _BV(WDIE)|_BV(WDP2)|_BV(WDP0);	// 0.5sec
+ 1a0:	e1 bc       	out	0x21, r14	; 33
+	g_pinState = (PINB & _BV(PB5)) ? PinState_High : PinState_Low;
+}
+
+static PinState getPinState()
+{
+	bool pin1st = (PINB & _BV(PB5)) ? true : false;
+ 1a2:	26 b3       	in	r18, 0x16	; 22
+ 1a4:	c8 01       	movw	r24, r16
+ 1a6:	01 97       	sbiw	r24, 0x01	; 1
+ 1a8:	f1 f7       	brne	.-4      	; 0x1a6 <__stack+0x47>
+	_delay_ms(10);
+	bool pin2st = (PINB & _BV(PB5)) ? true : false;
+ 1aa:	86 b3       	in	r24, 0x16	; 22
+ 1ac:	90 e0       	ldi	r25, 0x00	; 0
+ 1ae:	65 e0       	ldi	r22, 0x05	; 5
+ 1b0:	96 95       	lsr	r25
+ 1b2:	87 95       	ror	r24
+ 1b4:	6a 95       	dec	r22
+ 1b6:	e1 f7       	brne	.-8      	; 0x1b0 <__stack+0x51>
+ 1b8:	81 70       	andi	r24, 0x01	; 1
+	if (pin1st && pin2st)
+ 1ba:	25 ff       	sbrs	r18, 5
+ 1bc:	05 c0       	rjmp	.+10     	; 0x1c8 <__stack+0x69>
+ 1be:	88 23       	and	r24, r24
+ 1c0:	09 f4       	brne	.+2      	; 0x1c4 <__stack+0x65>
+ 1c2:	c6 cf       	rjmp	.-116    	; 0x150 <main+0x54>
+ 1c4:	92 e0       	ldi	r25, 0x02	; 2
+ 1c6:	04 c0       	rjmp	.+8      	; 0x1d0 <__stack+0x71>
+	{
+		return PinState_High;
+	}
+	if (!pin1st && !pin2st)
+ 1c8:	88 23       	and	r24, r24
+ 1ca:	09 f0       	breq	.+2      	; 0x1ce <__stack+0x6f>
+ 1cc:	c1 cf       	rjmp	.-126    	; 0x150 <main+0x54>
+ 1ce:	91 e0       	ldi	r25, 0x01	; 1
+{
+	PinState pinState = getPinState();
+	bool result = false;
+	if (pinState != PinState_Unknown)
+	{
+		if (g_pinState == PinState_Low)
+ 1d0:	80 91 73 00 	lds	r24, 0x0073
+ 1d4:	81 30       	cpi	r24, 0x01	; 1
+ 1d6:	11 f0       	breq	.+4      	; 0x1dc <__stack+0x7d>
+ 1d8:	80 e0       	ldi	r24, 0x00	; 0
+ 1da:	04 c0       	rjmp	.+8      	; 0x1e4 <__stack+0x85>
+ 1dc:	80 e0       	ldi	r24, 0x00	; 0
+ 1de:	92 30       	cpi	r25, 0x02	; 2
+ 1e0:	09 f4       	brne	.+2      	; 0x1e4 <__stack+0x85>
+ 1e2:	81 e0       	ldi	r24, 0x01	; 1
+			{
+				//pre = high, cur = low
+				result = true;
+			}
+		}
+		g_pinState = pinState;
+ 1e4:	90 93 73 00 	sts	0x0073, r25
+			set_sleep_mode(SLEEP_MODE_IDLE);
+			WDTCR = _BV(WDCE)|_BV(WDE);
+			WDTCR = _BV(WDIE)|_BV(WDP2)|_BV(WDP0);	// 0.5sec
+			break;
+		}
+		if (getPinTrigger())
+ 1e8:	88 23       	and	r24, r24
+ 1ea:	09 f4       	brne	.+2      	; 0x1ee <__stack+0x8f>
+ 1ec:	b1 cf       	rjmp	.-158    	; 0x150 <main+0x54>
+	return result;
+}
+	
+static void randomPlay()
+{
+	g_player.Stop();
+ 1ee:	88 e6       	ldi	r24, 0x68	; 104
+ 1f0:	90 e0       	ldi	r25, 0x00	; 0
+ 1f2:	be d4       	rcall	.+2428   	; 0xb70 <_ZN14PlayController4StopEv>
+	g_stream.Wakeup();
+ 1f4:	8f e6       	ldi	r24, 0x6F	; 111
+ 1f6:	90 e0       	ldi	r25, 0x00	; 0
+ 1f8:	24 d4       	rcall	.+2120   	; 0xa42 <_ZN9SPIStream6WakeupEv>
+ 1fa:	c0 e0       	ldi	r28, 0x00	; 0
+ 1fc:	d0 e0       	ldi	r29, 0x00	; 0
+static uint16_t getEntryCount()
+{
+	uint16_t count = 0;
+	for (;;)
+	{
+		::SPI_ReadStart(count << 4);
+ 1fe:	be 01       	movw	r22, r28
+ 200:	54 e0       	ldi	r21, 0x04	; 4
+ 202:	66 0f       	add	r22, r22
+ 204:	77 1f       	adc	r23, r23
+ 206:	5a 95       	dec	r21
+ 208:	e1 f7       	brne	.-8      	; 0x202 <__stack+0xa3>
+ 20a:	80 e0       	ldi	r24, 0x00	; 0
+ 20c:	90 e0       	ldi	r25, 0x00	; 0
+ 20e:	89 d0       	rcall	.+274    	; 0x322 <SPI_ReadStart>
+		if (::SPI_ReadNext() == 0xff)
+ 210:	95 d0       	rcall	.+298    	; 0x33c <SPI_ReadNext>
+ 212:	8f 3f       	cpi	r24, 0xFF	; 255
+ 214:	11 f0       	breq	.+4      	; 0x21a <__stack+0xbb>
+		{
+			break;
+		}
+		count++;
+ 216:	21 96       	adiw	r28, 0x01	; 1
+ 218:	f2 cf       	rjmp	.-28     	; 0x1fe <__stack+0x9f>
+static uint16_t g_randx;
+static uint16_t g_prevNumber = -1;
+
+static int rand(int div)
+{
+	g_randx = (g_randx << 2) + g_randx + 1;
+ 21a:	20 91 74 00 	lds	r18, 0x0074
+ 21e:	30 91 75 00 	lds	r19, 0x0075
+ 222:	c9 01       	movw	r24, r18
+ 224:	88 0f       	add	r24, r24
+ 226:	99 1f       	adc	r25, r25
+ 228:	88 0f       	add	r24, r24
+ 22a:	99 1f       	adc	r25, r25
+ 22c:	2f 5f       	subi	r18, 0xFF	; 255
+ 22e:	3f 4f       	sbci	r19, 0xFF	; 255
+ 230:	82 0f       	add	r24, r18
+ 232:	93 1f       	adc	r25, r19
+ 234:	90 93 75 00 	sts	0x0075, r25
+ 238:	80 93 74 00 	sts	0x0074, r24
+	return g_randx % div;
+ 23c:	be 01       	movw	r22, r28
+ 23e:	7c d5       	rcall	.+2808   	; 0xd38 <__udivmodhi4>
+ 240:	bc 01       	movw	r22, r24
+	g_player.Stop();
+	g_stream.Wakeup();
+	uint16_t entryCount = getEntryCount();
+
+	uint16_t number = rand(entryCount);
+	if (number == g_prevNumber)
+ 242:	80 91 60 00 	lds	r24, 0x0060
+ 246:	90 91 61 00 	lds	r25, 0x0061
+ 24a:	68 17       	cp	r22, r24
+ 24c:	79 07       	cpc	r23, r25
+ 24e:	29 f4       	brne	.+10     	; 0x25a <__stack+0xfb>
+	{
+		number = (number + 1) % entryCount;
+ 250:	cb 01       	movw	r24, r22
+ 252:	01 96       	adiw	r24, 0x01	; 1
+ 254:	be 01       	movw	r22, r28
+ 256:	70 d5       	rcall	.+2784   	; 0xd38 <__udivmodhi4>
+ 258:	bc 01       	movw	r22, r24
+	}
+	g_prevNumber = number;
+ 25a:	70 93 61 00 	sts	0x0061, r23
+ 25e:	60 93 60 00 	sts	0x0060, r22
+	return count;
+}
+
+static uint32_t getEntryAddress(uint16_t count)
+{
+	::SPI_ReadStart(count * 16 + 8);
+ 262:	84 e0       	ldi	r24, 0x04	; 4
+ 264:	66 0f       	add	r22, r22
+ 266:	77 1f       	adc	r23, r23
+ 268:	8a 95       	dec	r24
+ 26a:	e1 f7       	brne	.-8      	; 0x264 <__stack+0x105>
+ 26c:	68 5f       	subi	r22, 0xF8	; 248
+ 26e:	7f 4f       	sbci	r23, 0xFF	; 255
+ 270:	80 e0       	ldi	r24, 0x00	; 0
+ 272:	90 e0       	ldi	r25, 0x00	; 0
+ 274:	56 d0       	rcall	.+172    	; 0x322 <SPI_ReadStart>
+	uint32_t result = ::SPI_ReadNextDoubleWord();
+ 276:	6e d0       	rcall	.+220    	; 0x354 <SPI_ReadNextDoubleWord>
+ 278:	9b 01       	movw	r18, r22
+ 27a:	ac 01       	movw	r20, r24
+	{
+		number = (number + 1) % entryCount;
+	}
+	g_prevNumber = number;
+	uint32_t address = getEntryAddress(number);
+	g_player.Play(&g_stream, address);
+ 27c:	88 e6       	ldi	r24, 0x68	; 104
+ 27e:	90 e0       	ldi	r25, 0x00	; 0
+ 280:	6f e6       	ldi	r22, 0x6F	; 111
+ 282:	70 e0       	ldi	r23, 0x00	; 0
+ 284:	ea d4       	rcall	.+2516   	; 0xc5a <_ZN14PlayController4PlayEP9SPIStreamm>
+ 286:	64 cf       	rjmp	.-312    	; 0x150 <main+0x54>
+
+00000288 <__vector_10>:
+{
+	g_randx = (g_randx << 2) + g_randx + 1;
+	return g_randx % div;
+}
+
+ISR(TIMER0_COMPA_vect)
+ 288:	1f 92       	push	r1
+ 28a:	0f 92       	push	r0
+ 28c:	0f b6       	in	r0, 0x3f	; 63
+ 28e:	0f 92       	push	r0
+ 290:	11 24       	eor	r1, r1
+ 292:	2f 93       	push	r18
+ 294:	3f 93       	push	r19
+ 296:	4f 93       	push	r20
+ 298:	5f 93       	push	r21
+ 29a:	6f 93       	push	r22
+ 29c:	7f 93       	push	r23
+ 29e:	8f 93       	push	r24
+ 2a0:	9f 93       	push	r25
+ 2a2:	af 93       	push	r26
+ 2a4:	bf 93       	push	r27
+ 2a6:	ef 93       	push	r30
+ 2a8:	ff 93       	push	r31
+{
+	g_player.Timer();
+ 2aa:	88 e6       	ldi	r24, 0x68	; 104
+ 2ac:	90 e0       	ldi	r25, 0x00	; 0
+ 2ae:	93 d4       	rcall	.+2342   	; 0xbd6 <_ZN14PlayController5TimerEv>
+}
+ 2b0:	ff 91       	pop	r31
+ 2b2:	ef 91       	pop	r30
+ 2b4:	bf 91       	pop	r27
+ 2b6:	af 91       	pop	r26
+ 2b8:	9f 91       	pop	r25
+ 2ba:	8f 91       	pop	r24
+ 2bc:	7f 91       	pop	r23
+ 2be:	6f 91       	pop	r22
+ 2c0:	5f 91       	pop	r21
+ 2c2:	4f 91       	pop	r20
+ 2c4:	3f 91       	pop	r19
+ 2c6:	2f 91       	pop	r18
+ 2c8:	0f 90       	pop	r0
+ 2ca:	0f be       	out	0x3f, r0	; 63
+ 2cc:	0f 90       	pop	r0
+ 2ce:	1f 90       	pop	r1
+ 2d0:	18 95       	reti
+
+000002d2 <SPI_Initialize>:
+
+.global SPI_Initialize
+.func	SPI_Initialize
+SPI_Initialize:
+
+	in		r24, _SFR_IO_ADDR(PRR)
+ 2d2:	80 b5       	in	r24, 0x20	; 32
+	andi	r24, ~_BV(PRUSI)
+ 2d4:	8d 7f       	andi	r24, 0xFD	; 253
+	out		_SFR_IO_ADDR(PRR), r24
+ 2d6:	80 bd       	out	0x20, r24	; 32
+	out		_SFR_IO_ADDR(USISR), r1
+ 2d8:	1e b8       	out	0x0e, r1	; 14
+	out		_SFR_IO_ADDR(USICR), r1
+ 2da:	1d b8       	out	0x0d, r1	; 13
+
+	//SCK out
+	sbi		_SFR_IO_ADDR(DDRB), SCK_BIT
+ 2dc:	ba 9a       	sbi	0x17, 2	; 23
+
+	//SCK ‚Í high ‚É‚µ‚È‚¢‚Æ‚È‚ç‚È‚¢
+	//(CS low ‘JˆÚŽž‚É high ‚Æ‚·‚é‚½‚ß)
+	cbi		_SFR_IO_ADDR(PORTB), SCK_BIT
+ 2de:	c2 98       	cbi	0x18, 2	; 24
+
+	//MISO out
+	sbi		_SFR_IO_ADDR(DDRB), MISO_BIT
+ 2e0:	b9 9a       	sbi	0x17, 1	; 23
+
+	//MOSI in/pullup
+	cbi		_SFR_IO_ADDR(DDRB), MOSI_BIT
+ 2e2:	b8 98       	cbi	0x17, 0	; 23
+	sbi		_SFR_IO_ADDR(PORTB), MOSI_BIT
+ 2e4:	c0 9a       	sbi	0x18, 0	; 24
+
+	//CS out/high
+	sbi		_SFR_IO_ADDR(DDRB), CS_BIT
+ 2e6:	bb 9a       	sbi	0x17, 3	; 23
+	sbi		_SFR_IO_ADDR(PORTB), CS_BIT
+ 2e8:	c3 9a       	sbi	0x18, 3	; 24
+
+	ret
+ 2ea:	08 95       	ret
+
+000002ec <SPI_Uninitialize>:
+.endfunc
+
+.global SPI_Uninitialize
+.func	SPI_Uninitialize
+SPI_Uninitialize:
+	in		r24, _SFR_IO_ADDR(PRR)
+ 2ec:	80 b5       	in	r24, 0x20	; 32
+	ori		r24, _BV(PRUSI)
+ 2ee:	82 60       	ori	r24, 0x02	; 2
+	out		_SFR_IO_ADDR(PRR), r24
+ 2f0:	80 bd       	out	0x20, r24	; 32
+
+	in		r24, _SFR_IO_ADDR(DDRB)
+ 2f2:	87 b3       	in	r24, 0x17	; 23
+	andi	r24, ~(_BV(PB0)|_BV(PB1)|_BV(PB2)|_BV(PB3));
+ 2f4:	80 7f       	andi	r24, 0xF0	; 240
+	out		_SFR_IO_ADDR(DDRB), r24
+ 2f6:	87 bb       	out	0x17, r24	; 23
+	in		r24, _SFR_IO_ADDR(PORTB)
+ 2f8:	88 b3       	in	r24, 0x18	; 24
+	ori		r24, _BV(PB0)|_BV(PB1)|_BV(PB2)|_BV(PB3);
+ 2fa:	8f 60       	ori	r24, 0x0F	; 15
+	out		_SFR_IO_ADDR(PORTB), r24
+ 2fc:	88 bb       	out	0x18, r24	; 24
+	ret
+ 2fe:	08 95       	ret
+
+00000300 <shiftUSI>:
+.func	shiftUSI
+shiftUSI:
+	.rept	8
+	out		_SFR_IO_ADDR(USICR), r18
+	out		_SFR_IO_ADDR(USICR), r19
+	.endr
+ 300:	2d b9       	out	0x0d, r18	; 13
+ 302:	3d b9       	out	0x0d, r19	; 13
+ 304:	2d b9       	out	0x0d, r18	; 13
+ 306:	3d b9       	out	0x0d, r19	; 13
+ 308:	2d b9       	out	0x0d, r18	; 13
+ 30a:	3d b9       	out	0x0d, r19	; 13
+ 30c:	2d b9       	out	0x0d, r18	; 13
+ 30e:	3d b9       	out	0x0d, r19	; 13
+ 310:	2d b9       	out	0x0d, r18	; 13
+ 312:	3d b9       	out	0x0d, r19	; 13
+ 314:	2d b9       	out	0x0d, r18	; 13
+ 316:	3d b9       	out	0x0d, r19	; 13
+ 318:	2d b9       	out	0x0d, r18	; 13
+ 31a:	3d b9       	out	0x0d, r19	; 13
+ 31c:	2d b9       	out	0x0d, r18	; 13
+ 31e:	3d b9       	out	0x0d, r19	; 13
+	ret
+ 320:	08 95       	ret
+
+00000322 <SPI_ReadStart>:
+
+.global SPI_ReadStart
+.func	SPI_ReadStart
+SPI_ReadStart:
+	//CS  high
+	sbi		_SFR_IO_ADDR(PORTB), CS_BIT
+ 322:	c3 9a       	sbi	0x18, 3	; 24
+
+	//CS low
+	cbi		_SFR_IO_ADDR(PORTB), CS_BIT
+ 324:	c3 98       	cbi	0x18, 3	; 24
+
+	ldi		r18, _BV(USIWM0) | _BV(USITC)
+ 326:	21 e1       	ldi	r18, 0x11	; 17
+	ldi		r19, _BV(USIWM0) | _BV(USITC) | _BV(USICLK)
+ 328:	33 e1       	ldi	r19, 0x13	; 19
+
+	//command
+	ldi		r25, 0x03
+ 32a:	93 e0       	ldi	r25, 0x03	; 3
+	out		_SFR_IO_ADDR(USIDR), r25
+ 32c:	9f b9       	out	0x0f, r25	; 15
+	rcall	shiftUSI
+ 32e:	e8 df       	rcall	.-48     	; 0x300 <shiftUSI>
+
+	//A16-A23
+	out		_SFR_IO_ADDR(USIDR), r24
+ 330:	8f b9       	out	0x0f, r24	; 15
+	rcall	shiftUSI
+ 332:	e6 df       	rcall	.-52     	; 0x300 <shiftUSI>
+
+	//A8-A15
+	out		_SFR_IO_ADDR(USIDR), r23
+ 334:	7f b9       	out	0x0f, r23	; 15
+	rcall	shiftUSI
+ 336:	e4 df       	rcall	.-56     	; 0x300 <shiftUSI>
+
+	//A0-A7
+	out		_SFR_IO_ADDR(USIDR), r22
+ 338:	6f b9       	out	0x0f, r22	; 15
+	rjmp	shiftUSI
+ 33a:	e2 cf       	rjmp	.-60     	; 0x300 <shiftUSI>
+
+0000033c <SPI_ReadNext>:
+	
+
+.global SPI_ReadNext
+.func	SPI_ReadNext
+SPI_ReadNext:
+	ldi		r18, _BV(USIWM0)|_BV(USITC)
+ 33c:	21 e1       	ldi	r18, 0x11	; 17
+	ldi		r19, _BV(USIWM0)|_BV(USITC)|_BV(USICLK)
+ 33e:	33 e1       	ldi	r19, 0x13	; 19
+	rcall	shiftUSI
+ 340:	df df       	rcall	.-66     	; 0x300 <shiftUSI>
+	in		r24, _SFR_IO_ADDR(USIDR)
+ 342:	8f b1       	in	r24, 0x0f	; 15
+	ret
+ 344:	08 95       	ret
+
+00000346 <SPI_ReadNextWord>:
+.endfunc
+
+.global	SPI_ReadNextWord
+.func	SPI_ReadNextWord
+SPI_ReadNextWord:
+	ldi		r18, _BV(USIWM0)|_BV(USITC)
+ 346:	21 e1       	ldi	r18, 0x11	; 17
+	ldi		r19, _BV(USIWM0)|_BV(USITC)|_BV(USICLK)
+ 348:	33 e1       	ldi	r19, 0x13	; 19
+	rcall	shiftUSI
+ 34a:	da df       	rcall	.-76     	; 0x300 <shiftUSI>
+	in		r24, _SFR_IO_ADDR(USIDR)
+ 34c:	8f b1       	in	r24, 0x0f	; 15
+	rcall	shiftUSI
+ 34e:	d8 df       	rcall	.-80     	; 0x300 <shiftUSI>
+	in		r25, _SFR_IO_ADDR(USIDR)
+ 350:	9f b1       	in	r25, 0x0f	; 15
+	ret
+ 352:	08 95       	ret
+
+00000354 <SPI_ReadNextDoubleWord>:
+.endfunc
+
+.global SPI_ReadNextDoubleWord
+.func	SPI_ReadNextDoubleWord
+SPI_ReadNextDoubleWord:
+	ldi		r18, _BV(USIWM0)|_BV(USITC)
+ 354:	21 e1       	ldi	r18, 0x11	; 17
+	ldi		r19, _BV(USIWM0)|_BV(USITC)|_BV(USICLK)
+ 356:	33 e1       	ldi	r19, 0x13	; 19
+	rcall	shiftUSI
+ 358:	d3 df       	rcall	.-90     	; 0x300 <shiftUSI>
+	in		r22, _SFR_IO_ADDR(USIDR)
+ 35a:	6f b1       	in	r22, 0x0f	; 15
+	rcall	shiftUSI
+ 35c:	d1 df       	rcall	.-94     	; 0x300 <shiftUSI>
+	in		r23, _SFR_IO_ADDR(USIDR)
+ 35e:	7f b1       	in	r23, 0x0f	; 15
+	rcall	shiftUSI
+ 360:	cf df       	rcall	.-98     	; 0x300 <shiftUSI>
+	in		r24, _SFR_IO_ADDR(USIDR)
+ 362:	8f b1       	in	r24, 0x0f	; 15
+	rcall	shiftUSI
+ 364:	cd df       	rcall	.-102    	; 0x300 <shiftUSI>
+	in		r25, _SFR_IO_ADDR(USIDR)
+ 366:	9f b1       	in	r25, 0x0f	; 15
+	ret
+ 368:	08 95       	ret
+
+0000036a <SPI_ReadEnd>:
+.endfunc
+
+.global SPI_ReadEnd
+.func	SPI_ReadEnd
+SPI_ReadEnd:
+	sbi		_SFR_IO_ADDR(PORTB), CS_BIT
+ 36a:	c3 9a       	sbi	0x18, 3	; 24
+	ret
+ 36c:	08 95       	ret
+
+0000036e <SPI_ReadId>:
+.endfunc
+
+.global SPI_ReadId
+.func	SPI_ReadId
+SPI_ReadId:
+	cbi		_SFR_IO_ADDR(PORTB), CS_BIT
+ 36e:	c3 98       	cbi	0x18, 3	; 24
+
+	ldi		r18, _BV(USIWM0)|_BV(USITC)
+ 370:	21 e1       	ldi	r18, 0x11	; 17
+	ldi		r19, _BV(USIWM0)|_BV(USITC)|_BV(USICLK)
+ 372:	33 e1       	ldi	r19, 0x13	; 19
+
+	ldi		r24, 0x90
+ 374:	80 e9       	ldi	r24, 0x90	; 144
+	out		_SFR_IO_ADDR(USIDR), r24
+ 376:	8f b9       	out	0x0f, r24	; 15
+	rcall	shiftUSI
+ 378:	c3 df       	rcall	.-122    	; 0x300 <shiftUSI>
+
+	clr		r24
+ 37a:	88 27       	eor	r24, r24
+	out		_SFR_IO_ADDR(USIDR), r24
+ 37c:	8f b9       	out	0x0f, r24	; 15
+	rcall	shiftUSI
+ 37e:	c0 df       	rcall	.-128    	; 0x300 <shiftUSI>
+	out		_SFR_IO_ADDR(USIDR), r24
+ 380:	8f b9       	out	0x0f, r24	; 15
+	rcall	shiftUSI
+ 382:	be df       	rcall	.-132    	; 0x300 <shiftUSI>
+	out		_SFR_IO_ADDR(USIDR), r24
+ 384:	8f b9       	out	0x0f, r24	; 15
+	rcall	shiftUSI
+ 386:	bc df       	rcall	.-136    	; 0x300 <shiftUSI>
+
+	rcall	shiftUSI
+ 388:	bb df       	rcall	.-138    	; 0x300 <shiftUSI>
+	in		r25, _SFR_IO_ADDR(USIDR)
+ 38a:	9f b1       	in	r25, 0x0f	; 15
+
+	rcall	shiftUSI
+ 38c:	b9 df       	rcall	.-142    	; 0x300 <shiftUSI>
+	in		r24, _SFR_IO_ADDR(USIDR)
+ 38e:	8f b1       	in	r24, 0x0f	; 15
+
+	sbi		_SFR_IO_ADDR(PORTB), CS_BIT
+ 390:	c3 9a       	sbi	0x18, 3	; 24
+	ret
+ 392:	08 95       	ret
+
+00000394 <indexTable>:
+ 394:	ff ff       	.word	0xffff	; ????
+ 396:	ff ff       	.word	0xffff	; ????
+ 398:	02 04       	cpc	r0, r2
+ 39a:	06 08       	sbc	r0, r6
+
+0000039c <stepTable>:
+ 39c:	07 00       	.word	0x0007	; ????
+ 39e:	08 00       	.word	0x0008	; ????
+ 3a0:	09 00       	.word	0x0009	; ????
+ 3a2:	0a 00       	.word	0x000a	; ????
+ 3a4:	0b 00       	.word	0x000b	; ????
+ 3a6:	0c 00       	.word	0x000c	; ????
+ 3a8:	0d 00       	.word	0x000d	; ????
+ 3aa:	0e 00       	.word	0x000e	; ????
+ 3ac:	10 00       	.word	0x0010	; ????
+ 3ae:	11 00       	.word	0x0011	; ????
+ 3b0:	13 00       	.word	0x0013	; ????
+ 3b2:	15 00       	.word	0x0015	; ????
+ 3b4:	17 00       	.word	0x0017	; ????
+ 3b6:	19 00       	.word	0x0019	; ????
+ 3b8:	1c 00       	.word	0x001c	; ????
+ 3ba:	1f 00       	.word	0x001f	; ????
+ 3bc:	22 00       	.word	0x0022	; ????
+ 3be:	25 00       	.word	0x0025	; ????
+ 3c0:	29 00       	.word	0x0029	; ????
+ 3c2:	2d 00       	.word	0x002d	; ????
+ 3c4:	32 00       	.word	0x0032	; ????
+ 3c6:	37 00       	.word	0x0037	; ????
+ 3c8:	3c 00       	.word	0x003c	; ????
+ 3ca:	42 00       	.word	0x0042	; ????
+ 3cc:	49 00       	.word	0x0049	; ????
+ 3ce:	50 00       	.word	0x0050	; ????
+ 3d0:	58 00       	.word	0x0058	; ????
+ 3d2:	61 00       	.word	0x0061	; ????
+ 3d4:	6b 00       	.word	0x006b	; ????
+ 3d6:	76 00       	.word	0x0076	; ????
+ 3d8:	82 00       	.word	0x0082	; ????
+ 3da:	8f 00       	.word	0x008f	; ????
+ 3dc:	9d 00       	.word	0x009d	; ????
+ 3de:	ad 00       	.word	0x00ad	; ????
+ 3e0:	be 00       	.word	0x00be	; ????
+ 3e2:	d1 00       	.word	0x00d1	; ????
+ 3e4:	e6 00       	.word	0x00e6	; ????
+ 3e6:	fd 00       	.word	0x00fd	; ????
+ 3e8:	17 01       	movw	r2, r14
+ 3ea:	33 01       	movw	r6, r6
+ 3ec:	51 01       	movw	r10, r2
+ 3ee:	73 01       	movw	r14, r6
+ 3f0:	98 01       	movw	r18, r16
+ 3f2:	c1 01       	movw	r24, r2
+ 3f4:	ee 01       	movw	r28, r28
+ 3f6:	20 02       	muls	r18, r16
+ 3f8:	56 02       	muls	r21, r22
+ 3fa:	92 02       	muls	r25, r18
+ 3fc:	d4 02       	muls	r29, r20
+ 3fe:	1c 03       	fmul	r17, r20
+ 400:	6c 03       	fmul	r22, r20
+ 402:	c3 03       	fmuls	r20, r19
+ 404:	24 04       	cpc	r2, r4
+ 406:	8e 04       	cpc	r8, r14
+ 408:	02 05       	cpc	r16, r2
+ 40a:	83 05       	cpc	r24, r3
+ 40c:	10 06       	cpc	r1, r16
+ 40e:	ab 06       	cpc	r10, r27
+ 410:	56 07       	cpc	r21, r22
+ 412:	12 08       	sbc	r1, r2
+ 414:	e0 08       	sbc	r14, r0
+ 416:	c3 09       	sbc	r28, r3
+ 418:	bd 0a       	sbc	r11, r29
+ 41a:	d0 0b       	sbc	r29, r16
+ 41c:	ff 0c       	add	r15, r15
+ 41e:	4c 0e       	add	r4, r28
+ 420:	ba 0f       	add	r27, r26
+ 422:	4c 11       	cpse	r20, r12
+ 424:	07 13       	cpse	r16, r23
+ 426:	ee 14       	cp	r14, r14
+ 428:	06 17       	cp	r16, r22
+ 42a:	54 19       	sub	r21, r4
+ 42c:	dc 1b       	sub	r29, r28
+ 42e:	a5 1e       	adc	r10, r21
+ 430:	b6 21       	and	r27, r6
+ 432:	15 25       	eor	r17, r5
+ 434:	ca 28       	or	r12, r10
+ 436:	df 2c       	mov	r13, r15
+ 438:	5b 31       	cpi	r21, 0x1B	; 27
+ 43a:	4b 36       	cpi	r20, 0x6B	; 107
+ 43c:	b9 3b       	cpi	r27, 0xB9	; 185
+ 43e:	b2 41       	sbci	r27, 0x12	; 18
+ 440:	44 48       	sbci	r20, 0x84	; 132
+ 442:	7e 4f       	sbci	r23, 0xFE	; 254
+ 444:	71 57       	subi	r23, 0x71	; 113
+ 446:	2f 60       	ori	r18, 0x0F	; 15
+ 448:	ce 69       	ori	r28, 0x9E	; 158
+ 44a:	62 74       	andi	r22, 0x42	; 66
+ 44c:	ff 7f       	andi	r31, 0xFF	; 255
+
+0000044e <readNext_Static>:
+
+.section	.text
+
+.func readNext_Static
+readNext_Static:
+	macro_SPI_ReadNext r24, r18, r19
+ 44e:	2d b9       	out	0x0d, r18	; 13
+ 450:	3d b9       	out	0x0d, r19	; 13
+ 452:	2d b9       	out	0x0d, r18	; 13
+ 454:	3d b9       	out	0x0d, r19	; 13
+ 456:	2d b9       	out	0x0d, r18	; 13
+ 458:	3d b9       	out	0x0d, r19	; 13
+ 45a:	2d b9       	out	0x0d, r18	; 13
+ 45c:	3d b9       	out	0x0d, r19	; 13
+ 45e:	2d b9       	out	0x0d, r18	; 13
+ 460:	3d b9       	out	0x0d, r19	; 13
+ 462:	2d b9       	out	0x0d, r18	; 13
+ 464:	3d b9       	out	0x0d, r19	; 13
+ 466:	2d b9       	out	0x0d, r18	; 13
+ 468:	3d b9       	out	0x0d, r19	; 13
+ 46a:	2d b9       	out	0x0d, r18	; 13
+ 46c:	3d b9       	out	0x0d, r19	; 13
+ 46e:	8f b1       	in	r24, 0x0f	; 15
+	ret
+ 470:	08 95       	ret
+
+00000472 <ImaAdpcmDecoder_Create>:
+.endfunc
+
+.global		ImaAdpcmDecoder_Create
+.func		ImaAdpcmDecoder_Create
+ImaAdpcmDecoder_Create:
+	push	r28
+ 472:	cf 93       	push	r28
+	push	r29
+ 474:	df 93       	push	r29
+	push	r24
+ 476:	8f 93       	push	r24
+	push	r25
+ 478:	9f 93       	push	r25
+	ldi		r24, _end + Decoder_Table_Size
+ 47a:	8f e0       	ldi	r24, 0x0F	; 15
+	mov		r25, r1
+ 47c:	91 2d       	mov	r25, r1
+	rcall	malloc
+ 47e:	98 d4       	rcall	.+2352   	; 0xdb0 <malloc>
+	movw	r30, r24
+ 480:	fc 01       	movw	r30, r24
+	ldi		r26, lo8(Decode)
+ 482:	aa ed       	ldi	r26, 0xDA	; 218
+	ldi		r27, hi8(Decode)
+ 484:	b4 e0       	ldi	r27, 0x04	; 4
+	lsr		r27
+ 486:	b6 95       	lsr	r27
+	ror		r26
+ 488:	a7 95       	ror	r26
+	std		Z + Decoder_Table_Func_Decode + 0, r26
+ 48a:	a0 83       	st	Z, r26
+	std		Z + Decoder_Table_Func_Decode + 1, r27
+ 48c:	b1 83       	std	Z+1, r27	; 0x01
+	pop		r29
+ 48e:	df 91       	pop	r29
+	pop		r28
+ 490:	cf 91       	pop	r28
+	ldd		r26, Y + WaveInfo_blockAlign
+ 492:	ac 85       	ldd	r26, Y+12	; 0x0c
+	ldd		r27, Y + WaveInfo_blockAlign + 1
+ 494:	bd 85       	ldd	r27, Y+13	; 0x0d
+	subi	r26, 4
+ 496:	a4 50       	subi	r26, 0x04	; 4
+	sbc		r27, r1
+ 498:	b1 09       	sbc	r27, r1
+	movw	r20, r26
+ 49a:	ad 01       	movw	r20, r26
+	push	r24
+ 49c:	8f 93       	push	r24
+	push	r25
+ 49e:	9f 93       	push	r25
+	ldd		r22, Y + WaveInfo_blockCount
+ 4a0:	6e 85       	ldd	r22, Y+14	; 0x0e
+	ldd		r23, Y + WaveInfo_blockCount + 1
+ 4a2:	7f 85       	ldd	r23, Y+15	; 0x0f
+	ldd		r24, Y + WaveInfo_blockCount + 2
+ 4a4:	88 89       	ldd	r24, Y+16	; 0x10
+	ldd		r25, Y + WaveInfo_blockCount + 3
+ 4a6:	99 89       	ldd	r25, Y+17	; 0x11
+	rcall	Mul1632
+ 4a8:	bb d1       	rcall	.+886    	; 0x820 <Mul1632>
+	add		r22, r22
+ 4aa:	66 0f       	add	r22, r22
+	adc		r23, r23
+ 4ac:	77 1f       	adc	r23, r23
+	adc		r24, r24
+ 4ae:	88 1f       	adc	r24, r24
+	adc		r25, r25
+ 4b0:	99 1f       	adc	r25, r25
+	std		Z + Decoder_Table_TotalSamples, r22
+ 4b2:	62 83       	std	Z+2, r22	; 0x02
+	std		Z + Decoder_Table_TotalSamples + 1, r23
+ 4b4:	73 83       	std	Z+3, r23	; 0x03
+	std		Z + Decoder_Table_TotalSamples + 2, r24
+ 4b6:	84 83       	std	Z+4, r24	; 0x04
+	std		Z + Decoder_Table_TotalSamples + 3, r25
+ 4b8:	95 83       	std	Z+5, r25	; 0x05
+	pop		r25
+ 4ba:	9f 91       	pop	r25
+	pop		r24
+ 4bc:	8f 91       	pop	r24
+	adiw	r30, Decoder_Table_Size
+ 4be:	36 96       	adiw	r30, 0x06	; 6
+	std		Z + _blockSize, r26
+ 4c0:	a7 83       	std	Z+7, r26	; 0x07
+	std		Z + _blockSize + 1, r27
+ 4c2:	b0 87       	std	Z+8, r27	; 0x08
+	std		Z + _stepIndex, r1
+ 4c4:	10 82       	st	Z, r1
+	std		Z + _predicted, r1
+ 4c6:	13 82       	std	Z+3, r1	; 0x03
+	std		Z + _predicted + 1, r1
+ 4c8:	14 82       	std	Z+4, r1	; 0x04
+	ldi		r18, 0xf0
+ 4ca:	20 ef       	ldi	r18, 0xF0	; 240
+	std		Z + _dataFlag, r18
+ 4cc:	22 83       	std	Z+2, r18	; 0x02
+	ldi		r18, 1
+ 4ce:	21 e0       	ldi	r18, 0x01	; 1
+	std		Z + _blockCount, r18
+ 4d0:	25 83       	std	Z+5, r18	; 0x05
+	std		Z + _blockCount + 1, r1
+ 4d2:	16 82       	std	Z+6, r1	; 0x06
+	pop		r29
+ 4d4:	df 91       	pop	r29
+	pop		r28
+ 4d6:	cf 91       	pop	r28
+	ret
+ 4d8:	08 95       	ret
+
+000004da <Decode>:
+.endfunc
+
+.func		Decode
+Decode:
+	movw	r30, r24
+ 4da:	fc 01       	movw	r30, r24
+	ldd		r24, Z + _dataFlag
+ 4dc:	82 81       	ldd	r24, Z+2	; 0x02
+	swap	r24
+ 4de:	82 95       	swap	r24
+	or		r24, r24
+ 4e0:	88 2b       	or	r24, r24
+	std		Z + _dataFlag, r24
+ 4e2:	82 83       	std	Z+2, r24	; 0x02
+	brmi	2f
+ 4e4:	2a f1       	brmi	.+74     	; 0x530 <Decode+0x56>
+
+	macro_SPI_Init r18, r19
+ 4e6:	21 e1       	ldi	r18, 0x11	; 17
+ 4e8:	33 e1       	ldi	r19, 0x13	; 19
+	ldd		r20, Z + _blockCount
+ 4ea:	45 81       	ldd	r20, Z+5	; 0x05
+	ldd		r21, Z + _blockCount + 1
+ 4ec:	56 81       	ldd	r21, Z+6	; 0x06
+	subi	r20, 1
+ 4ee:	41 50       	subi	r20, 0x01	; 1
+	sbc		r21, r1
+ 4f0:	51 09       	sbc	r21, r1
+	brne	1f
+ 4f2:	49 f4       	brne	.+18     	; 0x506 <Decode+0x2c>
+	rcall	readNext_Static
+ 4f4:	ac df       	rcall	.-168    	; 0x44e <readNext_Static>
+	std		Z + _predicted, r24
+ 4f6:	83 83       	std	Z+3, r24	; 0x03
+	rcall	readNext_Static
+ 4f8:	aa df       	rcall	.-172    	; 0x44e <readNext_Static>
+	std		Z + _predicted + 1, r24
+ 4fa:	84 83       	std	Z+4, r24	; 0x04
+	rcall	readNext_Static
+ 4fc:	a8 df       	rcall	.-176    	; 0x44e <readNext_Static>
+	std		Z + _stepIndex, r24
+ 4fe:	80 83       	st	Z, r24
+	rcall	readNext_Static			; dummy (always 0)
+ 500:	a6 df       	rcall	.-180    	; 0x44e <readNext_Static>
+	ldd		r20, Z + _blockSize
+ 502:	47 81       	ldd	r20, Z+7	; 0x07
+	ldd		r21, Z + _blockSize + 1
+ 504:	50 85       	ldd	r21, Z+8	; 0x08
+1:
+	std		Z + _blockCount, r20
+ 506:	45 83       	std	Z+5, r20	; 0x05
+	std		Z + _blockCount + 1, r21
+ 508:	56 83       	std	Z+6, r21	; 0x06
+	macro_SPI_ReadNext r24, r18, r19
+ 50a:	2d b9       	out	0x0d, r18	; 13
+ 50c:	3d b9       	out	0x0d, r19	; 13
+ 50e:	2d b9       	out	0x0d, r18	; 13
+ 510:	3d b9       	out	0x0d, r19	; 13
+ 512:	2d b9       	out	0x0d, r18	; 13
+ 514:	3d b9       	out	0x0d, r19	; 13
+ 516:	2d b9       	out	0x0d, r18	; 13
+ 518:	3d b9       	out	0x0d, r19	; 13
+ 51a:	2d b9       	out	0x0d, r18	; 13
+ 51c:	3d b9       	out	0x0d, r19	; 13
+ 51e:	2d b9       	out	0x0d, r18	; 13
+ 520:	3d b9       	out	0x0d, r19	; 13
+ 522:	2d b9       	out	0x0d, r18	; 13
+ 524:	3d b9       	out	0x0d, r19	; 13
+ 526:	2d b9       	out	0x0d, r18	; 13
+ 528:	3d b9       	out	0x0d, r19	; 13
+ 52a:	8f b1       	in	r24, 0x0f	; 15
+	std		Z + _data, r24
+ 52c:	81 83       	std	Z+1, r24	; 0x01
+	rjmp	1f
+ 52e:	02 c0       	rjmp	.+4      	; 0x534 <Decode+0x5a>
+2:
+	ldd		r24, Z + _data
+ 530:	81 81       	ldd	r24, Z+1	; 0x01
+	swap	r24
+ 532:	82 95       	swap	r24
+1:
+	mov		r20, r24			; r20 = adpcm data
+ 534:	48 2f       	mov	r20, r24
+	ldd		r21, Z + _stepIndex
+ 536:	50 81       	ld	r21, Z
+
+	movw	r18, r30			; save Z
+ 538:	9f 01       	movw	r18, r30
+
+	; read step value
+	ldi		ZL, lo8(stepTable)
+ 53a:	ec e9       	ldi	r30, 0x9C	; 156
+	ldi		ZH, hi8(stepTable)
+ 53c:	f3 e0       	ldi	r31, 0x03	; 3
+	mov		r22, r21
+ 53e:	65 2f       	mov	r22, r21
+	add		r22, r22				; to word align
+ 540:	66 0f       	add	r22, r22
+	add		ZL, r22
+ 542:	e6 0f       	add	r30, r22
+	adc		ZH, r1
+ 544:	f1 1d       	adc	r31, r1
+	lpm		r22, Z+				; r22 = step
+ 546:	65 91       	lpm	r22, Z+
+	lpm		r23, Z
+ 548:	74 91       	lpm	r23, Z+
+
+	; calc stepIndex value
+	ldi		ZL, lo8(indexTable)
+ 54a:	e4 e9       	ldi	r30, 0x94	; 148
+	ldi		ZH, hi8(indexTable)
+ 54c:	f3 e0       	ldi	r31, 0x03	; 3
+	andi	r24, 0b00000111	
+ 54e:	87 70       	andi	r24, 0x07	; 7
+	add		ZL,	r24				; adpcm & 0b111
+ 550:	e8 0f       	add	r30, r24
+	adc		ZH, r1
+ 552:	f1 1d       	adc	r31, r1
+	lpm		r24, Z
+ 554:	84 91       	lpm	r24, Z+
+	add		r24, r21
+ 556:	85 0f       	add	r24, r21
+	brmi	1f
+ 558:	22 f0       	brmi	.+8      	; 0x562 <Decode+0x88>
+	cpi		r24, 88
+ 55a:	88 35       	cpi	r24, 0x58	; 88
+	brlo	2f
+ 55c:	18 f0       	brcs	.+6      	; 0x564 <Decode+0x8a>
+	ldi		r24, 88
+ 55e:	88 e5       	ldi	r24, 0x58	; 88
+	rjmp	2f
+ 560:	01 c0       	rjmp	.+2      	; 0x564 <Decode+0x8a>
+1:
+	clr		r24
+ 562:	88 27       	eor	r24, r24
+2:
+	movw	r30, r18			; restore Z
+ 564:	f9 01       	movw	r30, r18
+	std		Z + _stepIndex, 24
+ 566:	80 83       	st	Z, r24
+
+	movw	r26, r22
+ 568:	db 01       	movw	r26, r22
+	lsr		r27
+ 56a:	b6 95       	lsr	r27
+	ror		r26
+ 56c:	a7 95       	ror	r26
+	lsr		r27
+ 56e:	b6 95       	lsr	r27
+	ror		r26
+ 570:	a7 95       	ror	r26
+	lsr		r27
+ 572:	b6 95       	lsr	r27
+	ror		r26				; diff = step >> 3
+ 574:	a7 95       	ror	r26
+
+	sbrs	r20, 2
+ 576:	42 ff       	sbrs	r20, 2
+	rjmp	1f
+ 578:	02 c0       	rjmp	.+4      	; 0x57e <Decode+0xa4>
+	add		r26, r22
+ 57a:	a6 0f       	add	r26, r22
+	adc		r27, r23
+ 57c:	b7 1f       	adc	r27, r23
+1:
+	lsr		r23
+ 57e:	76 95       	lsr	r23
+	ror		r22
+ 580:	67 95       	ror	r22
+	sbrs	r20, 1
+ 582:	41 ff       	sbrs	r20, 1
+	rjmp	1f
+ 584:	02 c0       	rjmp	.+4      	; 0x58a <Decode+0xb0>
+
+	add		r26, r22
+ 586:	a6 0f       	add	r26, r22
+	adc		r27, r23
+ 588:	b7 1f       	adc	r27, r23
+1:
+	lsr		r23
+ 58a:	76 95       	lsr	r23
+	ror		r22
+ 58c:	67 95       	ror	r22
+	sbrs	r20, 0
+ 58e:	40 ff       	sbrs	r20, 0
+	rjmp	1f
+ 590:	02 c0       	rjmp	.+4      	; 0x596 <Decode+0xbc>
+	add		r26, r22
+ 592:	a6 0f       	add	r26, r22
+	adc		r27, r23
+ 594:	b7 1f       	adc	r27, r23
+1:
+	ldd		r24, Z + _predicted
+ 596:	83 81       	ldd	r24, Z+3	; 0x03
+	ldd		r25, Z + _predicted + 1
+ 598:	94 81       	ldd	r25, Z+4	; 0x04
+	sbrs	r20, 3
+ 59a:	43 ff       	sbrs	r20, 3
+	rjmp	1f
+ 59c:	06 c0       	rjmp	.+12     	; 0x5aa <Decode+0xd0>
+
+	sub		r24, r26
+ 59e:	8a 1b       	sub	r24, r26
+	sbc		r25, r27
+ 5a0:	9b 0b       	sbc	r25, r27
+	brvc	2f
+ 5a2:	43 f4       	brvc	.+16     	; 0x5b4 <Decode+0xda>
+	mov		r24, r1
+ 5a4:	81 2d       	mov	r24, r1
+	ldi		r25, 0x80	
+ 5a6:	90 e8       	ldi	r25, 0x80	; 128
+	rjmp	2f
+ 5a8:	05 c0       	rjmp	.+10     	; 0x5b4 <Decode+0xda>
+1:
+	add		r24, r26
+ 5aa:	8a 0f       	add	r24, r26
+	adc		r25, r27
+ 5ac:	9b 1f       	adc	r25, r27
+	brvc	2f
+ 5ae:	13 f4       	brvc	.+4      	; 0x5b4 <Decode+0xda>
+	ldi		r24, 0xff
+ 5b0:	8f ef       	ldi	r24, 0xFF	; 255
+	ldi		r25, 0x7f
+ 5b2:	9f e7       	ldi	r25, 0x7F	; 127
+2:
+	std		Z + _predicted, r24
+ 5b4:	83 83       	std	Z+3, r24	; 0x03
+	std		Z + _predicted + 1, r25
+ 5b6:	94 83       	std	Z+4, r25	; 0x04
+	ret
+ 5b8:	08 95       	ret
+
+000005ba <readNext_Static>:
+
+.section	.text
+
+.func readNext_Static
+readNext_Static:
+	macro_SPI_ReadNext r24, r18, r19
+ 5ba:	2d b9       	out	0x0d, r18	; 13
+ 5bc:	3d b9       	out	0x0d, r19	; 13
+ 5be:	2d b9       	out	0x0d, r18	; 13
+ 5c0:	3d b9       	out	0x0d, r19	; 13
+ 5c2:	2d b9       	out	0x0d, r18	; 13
+ 5c4:	3d b9       	out	0x0d, r19	; 13
+ 5c6:	2d b9       	out	0x0d, r18	; 13
+ 5c8:	3d b9       	out	0x0d, r19	; 13
+ 5ca:	2d b9       	out	0x0d, r18	; 13
+ 5cc:	3d b9       	out	0x0d, r19	; 13
+ 5ce:	2d b9       	out	0x0d, r18	; 13
+ 5d0:	3d b9       	out	0x0d, r19	; 13
+ 5d2:	2d b9       	out	0x0d, r18	; 13
+ 5d4:	3d b9       	out	0x0d, r19	; 13
+ 5d6:	2d b9       	out	0x0d, r18	; 13
+ 5d8:	3d b9       	out	0x0d, r19	; 13
+ 5da:	8f b1       	in	r24, 0x0f	; 15
+	ret
+ 5dc:	08 95       	ret
+
+000005de <YamahaAdpcmDecoder_Create>:
+.endfunc
+
+.global		YamahaAdpcmDecoder_Create
+.func		YamahaAdpcmDecoder_Create
+YamahaAdpcmDecoder_Create:
+	push	r28
+ 5de:	cf 93       	push	r28
+	push	r29
+ 5e0:	df 93       	push	r29
+	push	r24
+ 5e2:	8f 93       	push	r24
+	push	r25
+ 5e4:	9f 93       	push	r25
+	ldi		r24, _end + Decoder_Table_Size
+ 5e6:	80 e1       	ldi	r24, 0x10	; 16
+	mov		r25, r1
+ 5e8:	91 2d       	mov	r25, r1
+	rcall	malloc
+ 5ea:	e2 d3       	rcall	.+1988   	; 0xdb0 <malloc>
+	movw	r30, r24
+ 5ec:	fc 01       	movw	r30, r24
+	ldi		r26, lo8(Decode)
+ 5ee:	aa e4       	ldi	r26, 0x4A	; 74
+	ldi		r27, hi8(Decode)
+ 5f0:	b6 e0       	ldi	r27, 0x06	; 6
+	lsr		r27
+ 5f2:	b6 95       	lsr	r27
+	ror		r26
+ 5f4:	a7 95       	ror	r26
+	std		Z + Decoder_Table_Func_Decode + 0, r26
+ 5f6:	a0 83       	st	Z, r26
+	std		Z + Decoder_Table_Func_Decode + 1, r27
+ 5f8:	b1 83       	std	Z+1, r27	; 0x01
+	pop		r29
+ 5fa:	df 91       	pop	r29
+	pop		r28
+ 5fc:	cf 91       	pop	r28
+	ldd		r26, Y + WaveInfo_blockAlign
+ 5fe:	ac 85       	ldd	r26, Y+12	; 0x0c
+	ldd		r27, Y + WaveInfo_blockAlign + 1
+ 600:	bd 85       	ldd	r27, Y+13	; 0x0d
+	subi	r26, 4
+ 602:	a4 50       	subi	r26, 0x04	; 4
+	sbc		r27, r1
+ 604:	b1 09       	sbc	r27, r1
+	movw	r20, r26
+ 606:	ad 01       	movw	r20, r26
+	push	r24
+ 608:	8f 93       	push	r24
+	push	r25
+ 60a:	9f 93       	push	r25
+	ldd		r22, Y + WaveInfo_blockCount
+ 60c:	6e 85       	ldd	r22, Y+14	; 0x0e
+	ldd		r23, Y + WaveInfo_blockCount + 1
+ 60e:	7f 85       	ldd	r23, Y+15	; 0x0f
+	ldd		r24, Y + WaveInfo_blockCount + 2
+ 610:	88 89       	ldd	r24, Y+16	; 0x10
+	ldd		r25, Y + WaveInfo_blockCount + 3
+ 612:	99 89       	ldd	r25, Y+17	; 0x11
+	rcall	Mul1632
+ 614:	05 d1       	rcall	.+522    	; 0x820 <Mul1632>
+	add		r22, r22
+ 616:	66 0f       	add	r22, r22
+	adc		r23, r23
+ 618:	77 1f       	adc	r23, r23
+	adc		r24, r24
+ 61a:	88 1f       	adc	r24, r24
+	adc		r25, r25
+ 61c:	99 1f       	adc	r25, r25
+	std		Z + Decoder_Table_TotalSamples, r22
+ 61e:	62 83       	std	Z+2, r22	; 0x02
+	std		Z + Decoder_Table_TotalSamples + 1, r23
+ 620:	73 83       	std	Z+3, r23	; 0x03
+	std		Z + Decoder_Table_TotalSamples + 2, r24
+ 622:	84 83       	std	Z+4, r24	; 0x04
+	std		Z + Decoder_Table_TotalSamples + 3, r25
+ 624:	95 83       	std	Z+5, r25	; 0x05
+	pop		r25
+ 626:	9f 91       	pop	r25
+	pop		r24
+ 628:	8f 91       	pop	r24
+	adiw	r30, Decoder_Table_Size
+ 62a:	36 96       	adiw	r30, 0x06	; 6
+	std		Z + _blockSize, r20
+ 62c:	40 87       	std	Z+8, r20	; 0x08
+	std		Z + _blockSize + 1, r21
+ 62e:	51 87       	std	Z+9, r21	; 0x09
+	ldi		r18, 127
+ 630:	2f e7       	ldi	r18, 0x7F	; 127
+	std		Z + _step, r18
+ 632:	20 83       	st	Z, r18
+	std		Z + _step + 1, r1
+ 634:	11 82       	std	Z+1, r1	; 0x01
+	std		Z + _predicted, r1
+ 636:	14 82       	std	Z+4, r1	; 0x04
+	std		Z + _predicted + 1, r1
+ 638:	15 82       	std	Z+5, r1	; 0x05
+	ldi		r18, 0xf0
+ 63a:	20 ef       	ldi	r18, 0xF0	; 240
+	std		Z + _dataFlag, r18
+ 63c:	23 83       	std	Z+3, r18	; 0x03
+	ldi		r18, 1
+ 63e:	21 e0       	ldi	r18, 0x01	; 1
+	std		Z + _blockCount, r18
+ 640:	26 83       	std	Z+6, r18	; 0x06
+	std		Z + _blockCount + 1, r1
+ 642:	17 82       	std	Z+7, r1	; 0x07
+	pop		r29
+ 644:	df 91       	pop	r29
+	pop		r28
+ 646:	cf 91       	pop	r28
+	ret
+ 648:	08 95       	ret
+
+0000064a <Decode>:
+
+
+
+.func		Decode
+Decode:
+	movw	r30, r24
+ 64a:	fc 01       	movw	r30, r24
+	ldd		r24, Z + _dataFlag
+ 64c:	83 81       	ldd	r24, Z+3	; 0x03
+	swap	r24
+ 64e:	82 95       	swap	r24
+	or		r24, r24
+ 650:	88 2b       	or	r24, r24
+	std		Z + _dataFlag, r24
+ 652:	83 83       	std	Z+3, r24	; 0x03
+	brmi	2f
+ 654:	32 f1       	brmi	.+76     	; 0x6a2 <Decode+0x58>
+
+	macro_SPI_Init r18, r19
+ 656:	21 e1       	ldi	r18, 0x11	; 17
+ 658:	33 e1       	ldi	r19, 0x13	; 19
+	ldd		r20, Z + _blockCount
+ 65a:	46 81       	ldd	r20, Z+6	; 0x06
+	ldd		r21, Z + _blockCount + 1
+ 65c:	57 81       	ldd	r21, Z+7	; 0x07
+	subi	r20, 1
+ 65e:	41 50       	subi	r20, 0x01	; 1
+	sbc		r21, r1
+ 660:	51 09       	sbc	r21, r1
+	brne	1f
+ 662:	51 f4       	brne	.+20     	; 0x678 <Decode+0x2e>
+	rcall	readNext_Static
+ 664:	aa df       	rcall	.-172    	; 0x5ba <readNext_Static>
+	std		Z + _predicted, r24
+ 666:	84 83       	std	Z+4, r24	; 0x04
+	rcall	readNext_Static
+ 668:	a8 df       	rcall	.-176    	; 0x5ba <readNext_Static>
+	std		Z + _predicted + 1, r24
+ 66a:	85 83       	std	Z+5, r24	; 0x05
+	rcall	readNext_Static
+ 66c:	a6 df       	rcall	.-180    	; 0x5ba <readNext_Static>
+	std		Z + _step, r24
+ 66e:	80 83       	st	Z, r24
+	rcall	readNext_Static
+ 670:	a4 df       	rcall	.-184    	; 0x5ba <readNext_Static>
+	std		Z + _step + 1, r24
+ 672:	81 83       	std	Z+1, r24	; 0x01
+	ldd		r20, Z + _blockSize
+ 674:	40 85       	ldd	r20, Z+8	; 0x08
+	ldd		r21, Z + _blockSize + 1
+ 676:	51 85       	ldd	r21, Z+9	; 0x09
+1:
+	std		Z + _blockCount, r20
+ 678:	46 83       	std	Z+6, r20	; 0x06
+	std		Z + _blockCount + 1, r21
+ 67a:	57 83       	std	Z+7, r21	; 0x07
+	macro_SPI_ReadNext r24, r18, r19
+ 67c:	2d b9       	out	0x0d, r18	; 13
+ 67e:	3d b9       	out	0x0d, r19	; 13
+ 680:	2d b9       	out	0x0d, r18	; 13
+ 682:	3d b9       	out	0x0d, r19	; 13
+ 684:	2d b9       	out	0x0d, r18	; 13
+ 686:	3d b9       	out	0x0d, r19	; 13
+ 688:	2d b9       	out	0x0d, r18	; 13
+ 68a:	3d b9       	out	0x0d, r19	; 13
+ 68c:	2d b9       	out	0x0d, r18	; 13
+ 68e:	3d b9       	out	0x0d, r19	; 13
+ 690:	2d b9       	out	0x0d, r18	; 13
+ 692:	3d b9       	out	0x0d, r19	; 13
+ 694:	2d b9       	out	0x0d, r18	; 13
+ 696:	3d b9       	out	0x0d, r19	; 13
+ 698:	2d b9       	out	0x0d, r18	; 13
+ 69a:	3d b9       	out	0x0d, r19	; 13
+ 69c:	8f b1       	in	r24, 0x0f	; 15
+	std		Z + _data, r24
+ 69e:	82 83       	std	Z+2, r24	; 0x02
+	rjmp	1f
+ 6a0:	02 c0       	rjmp	.+4      	; 0x6a6 <Decode+0x5c>
+2:
+	ldd		r24, Z + _data
+ 6a2:	82 81       	ldd	r24, Z+2	; 0x02
+	swap	r24
+ 6a4:	82 95       	swap	r24
+1:
+	ldd		r22, Z + _step
+ 6a6:	60 81       	ld	r22, Z
+	ldd		r23, Z + _step + 1
+ 6a8:	71 81       	ldd	r23, Z+1	; 0x01
+	movw	r26, r22
+ 6aa:	db 01       	movw	r26, r22
+	movw	r20, r22
+ 6ac:	ab 01       	movw	r20, r22
+
+	lsr		r27
+ 6ae:	b6 95       	lsr	r27
+	ror		r26
+ 6b0:	a7 95       	ror	r26
+	lsr		r27
+ 6b2:	b6 95       	lsr	r27
+	ror		r26
+ 6b4:	a7 95       	ror	r26
+	lsr		r27
+ 6b6:	b6 95       	lsr	r27
+	ror		r26				; diff = step >> 3
+ 6b8:	a7 95       	ror	r26
+
+	sbrs	r24, 2
+ 6ba:	82 ff       	sbrs	r24, 2
+	rjmp	1f
+ 6bc:	02 c0       	rjmp	.+4      	; 0x6c2 <Decode+0x78>
+	add		r26, r22
+ 6be:	a6 0f       	add	r26, r22
+	adc		r27, r23
+ 6c0:	b7 1f       	adc	r27, r23
+1:
+	lsr		r23
+ 6c2:	76 95       	lsr	r23
+	ror		r22
+ 6c4:	67 95       	ror	r22
+	sbrs	r24, 1
+ 6c6:	81 ff       	sbrs	r24, 1
+	rjmp	1f
+ 6c8:	02 c0       	rjmp	.+4      	; 0x6ce <Decode+0x84>
+
+	add		r26, r22
+ 6ca:	a6 0f       	add	r26, r22
+	adc		r27, r23
+ 6cc:	b7 1f       	adc	r27, r23
+1:
+	lsr		r23
+ 6ce:	76 95       	lsr	r23
+	ror		r22
+ 6d0:	67 95       	ror	r22
+	sbrs	r24, 0
+ 6d2:	80 ff       	sbrs	r24, 0
+	rjmp	1f
+ 6d4:	02 c0       	rjmp	.+4      	; 0x6da <Decode+0x90>
+	add		r26, r22
+ 6d6:	a6 0f       	add	r26, r22
+	adc		r27, r23
+ 6d8:	b7 1f       	adc	r27, r23
+1:
+	mov		r18, r24
+ 6da:	28 2f       	mov	r18, r24
+	ldd		r24, Z + _predicted
+ 6dc:	84 81       	ldd	r24, Z+4	; 0x04
+	ldd		r25, Z + _predicted + 1
+ 6de:	95 81       	ldd	r25, Z+5	; 0x05
+	sbrs	r18, 3
+ 6e0:	23 ff       	sbrs	r18, 3
+	rjmp	1f
+ 6e2:	06 c0       	rjmp	.+12     	; 0x6f0 <Decode+0xa6>
+
+	sub		r24, r26
+ 6e4:	8a 1b       	sub	r24, r26
+	sbc		r25, r27
+ 6e6:	9b 0b       	sbc	r25, r27
+	brvc	2f
+ 6e8:	43 f4       	brvc	.+16     	; 0x6fa <Decode+0xb0>
+	mov		r24, r1
+ 6ea:	81 2d       	mov	r24, r1
+	ldi		r25, 0x80	
+ 6ec:	90 e8       	ldi	r25, 0x80	; 128
+	rjmp	2f
+ 6ee:	05 c0       	rjmp	.+10     	; 0x6fa <Decode+0xb0>
+1:
+	add		r24, r26
+ 6f0:	8a 0f       	add	r24, r26
+	adc		r25, r27
+ 6f2:	9b 1f       	adc	r25, r27
+	brvc	2f
+ 6f4:	13 f4       	brvc	.+4      	; 0x6fa <Decode+0xb0>
+	ldi		r24, 0xff
+ 6f6:	8f ef       	ldi	r24, 0xFF	; 255
+	ldi		r25, 0x7f
+ 6f8:	9f e7       	ldi	r25, 0x7F	; 127
+2:
+	std		Z + _predicted, r24
+ 6fa:	84 83       	std	Z+4, r24	; 0x04
+	std		Z + _predicted + 1, r25
+ 6fc:	95 83       	std	Z+5, r25	; 0x05
+
+	ldi		r26, 230
+ 6fe:	a6 ee       	ldi	r26, 0xE6	; 230
+	clr		r27
+ 700:	bb 27       	eor	r27, r27
+	andi	r18, 0b111
+ 702:	27 70       	andi	r18, 0x07	; 7
+	breq	1f
+ 704:	69 f0       	breq	.+26     	; 0x720 <Decode+0xd6>
+	subi	r18, 4
+ 706:	24 50       	subi	r18, 0x04	; 4
+	brcs	1f
+ 708:	58 f0       	brcs	.+22     	; 0x720 <Decode+0xd6>
+	ldi		r26, 307 - 256
+ 70a:	a3 e3       	ldi	r26, 0x33	; 51
+	ldi		r27, 1
+ 70c:	b1 e0       	ldi	r27, 0x01	; 1
+	breq	1f
+ 70e:	41 f0       	breq	.+16     	; 0x720 <Decode+0xd6>
+	ldi		r26, 409 - 256
+ 710:	a9 e9       	ldi	r26, 0x99	; 153
+	dec		r18
+ 712:	2a 95       	dec	r18
+	breq	1f
+ 714:	29 f0       	breq	.+10     	; 0x720 <Decode+0xd6>
+	clr		r26
+ 716:	aa 27       	eor	r26, r26
+	ldi		r27, 2
+ 718:	b2 e0       	ldi	r27, 0x02	; 2
+	dec		r18
+ 71a:	2a 95       	dec	r18
+	breq	1f
+ 71c:	09 f0       	breq	.+2      	; 0x720 <Decode+0xd6>
+	ldi		r26, 614 - 512
+ 71e:	a6 e6       	ldi	r26, 0x66	; 102
+1:
+	clr		r18
+ 720:	22 27       	eor	r18, r18
+	clr		r19
+ 722:	33 27       	eor	r19, r19
+	clr		r23
+ 724:	77 27       	eor	r23, r23
+	clr		r22
+ 726:	66 27       	eor	r22, r22
+		adc		r23, r22
+	2:
+		add		r20, r20
+		adc		r21, r21
+		adc		r22, r22
+	.endr
+ 728:	a7 95       	ror	r26
+ 72a:	18 f4       	brcc	.+6      	; 0x732 <Decode+0xe8>
+ 72c:	24 0f       	add	r18, r20
+ 72e:	35 1f       	adc	r19, r21
+ 730:	76 1f       	adc	r23, r22
+ 732:	44 0f       	add	r20, r20
+ 734:	55 1f       	adc	r21, r21
+ 736:	66 1f       	adc	r22, r22
+ 738:	a7 95       	ror	r26
+ 73a:	18 f4       	brcc	.+6      	; 0x742 <Decode+0xf8>
+ 73c:	24 0f       	add	r18, r20
+ 73e:	35 1f       	adc	r19, r21
+ 740:	76 1f       	adc	r23, r22
+ 742:	44 0f       	add	r20, r20
+ 744:	55 1f       	adc	r21, r21
+ 746:	66 1f       	adc	r22, r22
+ 748:	a7 95       	ror	r26
+ 74a:	18 f4       	brcc	.+6      	; 0x752 <Decode+0x108>
+ 74c:	24 0f       	add	r18, r20
+ 74e:	35 1f       	adc	r19, r21
+ 750:	76 1f       	adc	r23, r22
+ 752:	44 0f       	add	r20, r20
+ 754:	55 1f       	adc	r21, r21
+ 756:	66 1f       	adc	r22, r22
+ 758:	a7 95       	ror	r26
+ 75a:	18 f4       	brcc	.+6      	; 0x762 <Decode+0x118>
+ 75c:	24 0f       	add	r18, r20
+ 75e:	35 1f       	adc	r19, r21
+ 760:	76 1f       	adc	r23, r22
+ 762:	44 0f       	add	r20, r20
+ 764:	55 1f       	adc	r21, r21
+ 766:	66 1f       	adc	r22, r22
+ 768:	a7 95       	ror	r26
+ 76a:	18 f4       	brcc	.+6      	; 0x772 <Decode+0x128>
+ 76c:	24 0f       	add	r18, r20
+ 76e:	35 1f       	adc	r19, r21
+ 770:	76 1f       	adc	r23, r22
+ 772:	44 0f       	add	r20, r20
+ 774:	55 1f       	adc	r21, r21
+ 776:	66 1f       	adc	r22, r22
+ 778:	a7 95       	ror	r26
+ 77a:	18 f4       	brcc	.+6      	; 0x782 <Decode+0x138>
+ 77c:	24 0f       	add	r18, r20
+ 77e:	35 1f       	adc	r19, r21
+ 780:	76 1f       	adc	r23, r22
+ 782:	44 0f       	add	r20, r20
+ 784:	55 1f       	adc	r21, r21
+ 786:	66 1f       	adc	r22, r22
+ 788:	a7 95       	ror	r26
+ 78a:	18 f4       	brcc	.+6      	; 0x792 <Decode+0x148>
+ 78c:	24 0f       	add	r18, r20
+ 78e:	35 1f       	adc	r19, r21
+ 790:	76 1f       	adc	r23, r22
+ 792:	44 0f       	add	r20, r20
+ 794:	55 1f       	adc	r21, r21
+ 796:	66 1f       	adc	r22, r22
+ 798:	a7 95       	ror	r26
+ 79a:	18 f4       	brcc	.+6      	; 0x7a2 <Decode+0x158>
+ 79c:	24 0f       	add	r18, r20
+ 79e:	35 1f       	adc	r19, r21
+ 7a0:	76 1f       	adc	r23, r22
+ 7a2:	44 0f       	add	r20, r20
+ 7a4:	55 1f       	adc	r21, r21
+ 7a6:	66 1f       	adc	r22, r22
+
+	ror		r27
+ 7a8:	b7 95       	ror	r27
+	brcc	2f
+ 7aa:	18 f4       	brcc	.+6      	; 0x7b2 <Decode+0x168>
+	add		r18, r20
+ 7ac:	24 0f       	add	r18, r20
+	adc		r19, r21
+ 7ae:	35 1f       	adc	r19, r21
+	adc		r23, r22
+ 7b0:	76 1f       	adc	r23, r22
+2:
+	add		r20, r20
+ 7b2:	44 0f       	add	r20, r20
+	adc		r21, r21
+ 7b4:	55 1f       	adc	r21, r21
+	adc		r22, r22
+ 7b6:	66 1f       	adc	r22, r22
+	ror		r27
+ 7b8:	b7 95       	ror	r27
+	brcc	2f
+ 7ba:	18 f4       	brcc	.+6      	; 0x7c2 <Decode+0x178>
+	add		r18, r20
+ 7bc:	24 0f       	add	r18, r20
+	adc		r19, r21
+ 7be:	35 1f       	adc	r19, r21
+	adc		r23, r22
+ 7c0:	76 1f       	adc	r23, r22
+2:
+	cpi		r19, 127
+ 7c2:	3f 37       	cpi	r19, 0x7F	; 127
+	cpc		r23, r1
+ 7c4:	71 05       	cpc	r23, r1
+	brcc	2f
+ 7c6:	10 f4       	brcc	.+4      	; 0x7cc <Decode+0x182>
+	ldi		r19, 127
+ 7c8:	3f e7       	ldi	r19, 0x7F	; 127
+	rjmp	3f
+ 7ca:	06 c0       	rjmp	.+12     	; 0x7d8 <Decode+0x18e>
+2:
+	cpi		r19, lo8(24576)
+ 7cc:	30 30       	cpi	r19, 0x00	; 0
+	ldi		r20, hi8(24576)
+ 7ce:	40 e6       	ldi	r20, 0x60	; 96
+	cpc		r23, r20
+ 7d0:	74 07       	cpc	r23, r20
+	brcs	3f
+ 7d2:	10 f0       	brcs	.+4      	; 0x7d8 <Decode+0x18e>
+	ldi		r19, lo8(24576)
+ 7d4:	30 e0       	ldi	r19, 0x00	; 0
+	ldi		r23, hi8(24576)
+ 7d6:	70 e6       	ldi	r23, 0x60	; 96
+3:
+	std		Z + _step, r19
+ 7d8:	30 83       	st	Z, r19
+	std		Z + _step + 1, r23
+ 7da:	71 83       	std	Z+1, r23	; 0x01
+	ret
+ 7dc:	08 95       	ret
+
+000007de <Decoder_Create>:
+	.section	.text
+
+.global Decoder_Create
+.func	Decoder_Create
+Decoder_Create:
+	movw	r30, r24
+ 7de:	fc 01       	movw	r30, r24
+	ldd		r18, Z + WaveInfo_formatTag
+ 7e0:	24 81       	ldd	r18, Z+4	; 0x04
+	ldd		r19, Z + WaveInfo_formatTag + 1
+ 7e2:	35 81       	ldd	r19, Z+5	; 0x05
+	ldi		r30, lo8(ImaAdpcmDecoder_Create)
+ 7e4:	e2 e7       	ldi	r30, 0x72	; 114
+	ldi		r31, hi8(ImaAdpcmDecoder_Create)
+ 7e6:	f4 e0       	ldi	r31, 0x04	; 4
+	cpi		r18, 0x11
+ 7e8:	21 31       	cpi	r18, 0x11	; 17
+	cpc		r19, r1
+ 7ea:	31 05       	cpc	r19, r1
+	breq	1f
+ 7ec:	41 f0       	breq	.+16     	; 0x7fe <Decoder_Create+0x20>
+	ldi		r30, lo8(YamahaAdpcmDecoder_Create)
+ 7ee:	ee ed       	ldi	r30, 0xDE	; 222
+	ldi		r31, hi8(YamahaAdpcmDecoder_Create)
+ 7f0:	f5 e0       	ldi	r31, 0x05	; 5
+	cpi		r18, 0x20
+ 7f2:	20 32       	cpi	r18, 0x20	; 32
+	cpc		r19, r1
+ 7f4:	31 05       	cpc	r19, r1
+	breq	1f
+ 7f6:	19 f0       	breq	.+6      	; 0x7fe <Decoder_Create+0x20>
+	clr		r24
+ 7f8:	88 27       	eor	r24, r24
+	clr		r25
+ 7fa:	99 27       	eor	r25, r25
+	ret
+ 7fc:	08 95       	ret
+1:
+	lsr		r31
+ 7fe:	f6 95       	lsr	r31
+	ror		r30
+ 800:	e7 95       	ror	r30
+	ijmp
+ 802:	09 94       	ijmp
+
+00000804 <Decoder_Delete>:
+.endfunc
+
+.global Decoder_Delete
+.func	Decoder_Delete
+Decoder_Delete:
+	rjmp	free
+ 804:	82 c3       	rjmp	.+1796   	; 0xf0a <free>
+
+00000806 <Decoder_Decode>:
+.endfunc
+
+.global Decoder_Decode
+.func	Decoder_Decode
+Decoder_Decode:
+	mov		r30, r24
+ 806:	e8 2f       	mov	r30, r24
+	ldd		r20, Z + Decoder_Table_Func_Decode
+ 808:	40 81       	ld	r20, Z
+	ldd		r21, Z + Decoder_Table_Func_Decode + 1
+ 80a:	51 81       	ldd	r21, Z+1	; 0x01
+	adiw	r30, Decoder_Table_Size
+ 80c:	36 96       	adiw	r30, 0x06	; 6
+	movw	r24, r30
+ 80e:	cf 01       	movw	r24, r30
+	movw	r30, r20
+ 810:	fa 01       	movw	r30, r20
+	ijmp
+ 812:	09 94       	ijmp
+
+00000814 <Decoder_GetTotalSamples>:
+.endfunc
+
+.global Decoder_GetTotalSamples
+.func Decoder_GetTotalSamples
+Decoder_GetTotalSamples:
+	mov		r30, r24
+ 814:	e8 2f       	mov	r30, r24
+	ldd		r22, Z + Decoder_Table_TotalSamples
+ 816:	62 81       	ldd	r22, Z+2	; 0x02
+	ldd		r23, Z + Decoder_Table_TotalSamples + 1
+ 818:	73 81       	ldd	r23, Z+3	; 0x03
+	ldd		r24, Z + Decoder_Table_TotalSamples + 2
+ 81a:	84 81       	ldd	r24, Z+4	; 0x04
+	ldd		r25, Z + Decoder_Table_TotalSamples + 3
+ 81c:	95 81       	ldd	r25, Z+5	; 0x05
+	ret
+ 81e:	08 95       	ret
+
+00000820 <Mul1632>:
+	; r25:r24:r23:r22 = r25:r24:r23:r22 * r21:r20
+
+.global Mul1632
+.func	Mul1632
+Mul1632:
+	push	r16
+ 820:	0f 93       	push	r16
+	push	r17
+ 822:	1f 93       	push	r17
+	push	r18
+ 824:	2f 93       	push	r18
+	push	r19
+ 826:	3f 93       	push	r19
+	push	r26
+ 828:	af 93       	push	r26
+	push	r20
+ 82a:	4f 93       	push	r20
+	push	r21
+ 82c:	5f 93       	push	r21
+
+	movw	r16, r22
+ 82e:	8b 01       	movw	r16, r22
+	movw	r18, r24
+ 830:	9c 01       	movw	r18, r24
+
+	clr		r22
+ 832:	66 27       	eor	r22, r22
+	clr		r23
+ 834:	77 27       	eor	r23, r23
+	clr		r24
+ 836:	88 27       	eor	r24, r24
+	clr		r25
+ 838:	99 27       	eor	r25, r25
+
+	ldi		r26, 16
+ 83a:	a0 e1       	ldi	r26, 0x10	; 16
+2:
+	lsr		r21
+ 83c:	56 95       	lsr	r21
+	ror		r20
+ 83e:	47 95       	ror	r20
+	brcc	1f
+ 840:	20 f4       	brcc	.+8      	; 0x84a <Mul1632+0x2a>
+	add		r22, r16
+ 842:	60 0f       	add	r22, r16
+	adc		r23, r17
+ 844:	71 1f       	adc	r23, r17
+	adc		r24, r18
+ 846:	82 1f       	adc	r24, r18
+	adc		r25, r19
+ 848:	93 1f       	adc	r25, r19
+1:
+	add		r16, r16
+ 84a:	00 0f       	add	r16, r16
+	adc		r17, r17
+ 84c:	11 1f       	adc	r17, r17
+	adc		r18, r18
+ 84e:	22 1f       	adc	r18, r18
+	adc		r19, r19
+ 850:	33 1f       	adc	r19, r19
+	dec		r26
+ 852:	aa 95       	dec	r26
+	brne	2b
+ 854:	99 f7       	brne	.-26     	; 0x83c <Mul1632+0x1c>
+
+	pop		r21
+ 856:	5f 91       	pop	r21
+	pop		r20
+ 858:	4f 91       	pop	r20
+	pop		r26
+ 85a:	af 91       	pop	r26
+	pop		r19
+ 85c:	3f 91       	pop	r19
+	pop		r18
+ 85e:	2f 91       	pop	r18
+	pop		r17
+ 860:	1f 91       	pop	r17
+	pop		r16
+ 862:	0f 91       	pop	r16
+	ret
+ 864:	08 95       	ret
+
+00000866 <_ZN10WaveParser11checkFourCCEP9SPIStreamPKh>:
+	waveInfo.dataOffset = pStream->GetPosition();
+	waveInfo.blockCount = waveInfo.dataSize / waveInfo.blockAlign;
+	return true;
+}
+
+bool WaveParser::checkFourCC(SPIStream* pStream, const uint8_t fourCC[4])
+ 866:	ef 92       	push	r14
+ 868:	ff 92       	push	r15
+ 86a:	0f 93       	push	r16
+ 86c:	1f 93       	push	r17
+ 86e:	df 93       	push	r29
+ 870:	cf 93       	push	r28
+ 872:	00 d0       	rcall	.+0      	; 0x874 <_ZN10WaveParser11checkFourCCEP9SPIStreamPKh+0xe>
+ 874:	00 d0       	rcall	.+0      	; 0x876 <_ZN10WaveParser11checkFourCCEP9SPIStreamPKh+0x10>
+ 876:	cd b7       	in	r28, 0x3d	; 61
+ 878:	de b7       	in	r29, 0x3e	; 62
+ 87a:	7b 01       	movw	r14, r22
+{
+	uint8_t buffer[4];
+	pStream->Read(buffer, sizeof(buffer));
+ 87c:	8e 01       	movw	r16, r28
+ 87e:	0f 5f       	subi	r16, 0xFF	; 255
+ 880:	1f 4f       	sbci	r17, 0xFF	; 255
+ 882:	b8 01       	movw	r22, r16
+ 884:	44 e0       	ldi	r20, 0x04	; 4
+ 886:	50 e0       	ldi	r21, 0x00	; 0
+ 888:	07 d1       	rcall	.+526    	; 0xa98 <_ZN9SPIStream4ReadEPhj>
+ 88a:	20 e0       	ldi	r18, 0x00	; 0
+ 88c:	30 e0       	ldi	r19, 0x00	; 0
+	for (uint8_t i = 0; i < 4; ++i)
+	{
+		if (buffer[i] != pgm_read_byte(&fourCC[i]))
+ 88e:	a8 01       	movw	r20, r16
+ 890:	f7 01       	movw	r30, r14
+ 892:	e2 0f       	add	r30, r18
+ 894:	f3 1f       	adc	r31, r19
+ 896:	e4 91       	lpm	r30, Z+
+ 898:	da 01       	movw	r26, r20
+ 89a:	a2 0f       	add	r26, r18
+ 89c:	b3 1f       	adc	r27, r19
+ 89e:	8c 91       	ld	r24, X
+ 8a0:	8e 17       	cp	r24, r30
+ 8a2:	11 f0       	breq	.+4      	; 0x8a8 <_ZN10WaveParser11checkFourCCEP9SPIStreamPKh+0x42>
+ 8a4:	80 e0       	ldi	r24, 0x00	; 0
+ 8a6:	06 c0       	rjmp	.+12     	; 0x8b4 <_ZN10WaveParser11checkFourCCEP9SPIStreamPKh+0x4e>
+ 8a8:	2f 5f       	subi	r18, 0xFF	; 255
+ 8aa:	3f 4f       	sbci	r19, 0xFF	; 255
+
+bool WaveParser::checkFourCC(SPIStream* pStream, const uint8_t fourCC[4])
+{
+	uint8_t buffer[4];
+	pStream->Read(buffer, sizeof(buffer));
+	for (uint8_t i = 0; i < 4; ++i)
+ 8ac:	24 30       	cpi	r18, 0x04	; 4
+ 8ae:	31 05       	cpc	r19, r1
+ 8b0:	79 f7       	brne	.-34     	; 0x890 <_ZN10WaveParser11checkFourCCEP9SPIStreamPKh+0x2a>
+ 8b2:	81 e0       	ldi	r24, 0x01	; 1
+		{
+			return false;
+		}
+	}
+	return true;
+}
+ 8b4:	0f 90       	pop	r0
+ 8b6:	0f 90       	pop	r0
+ 8b8:	0f 90       	pop	r0
+ 8ba:	0f 90       	pop	r0
+ 8bc:	cf 91       	pop	r28
+ 8be:	df 91       	pop	r29
+ 8c0:	1f 91       	pop	r17
+ 8c2:	0f 91       	pop	r16
+ 8c4:	ff 90       	pop	r15
+ 8c6:	ef 90       	pop	r14
+ 8c8:	08 95       	ret
+
+000008ca <_ZN10WaveParser10readFourCCEP9SPIStreamPKhRm>:
+
+bool WaveParser::readFourCC(SPIStream* pStream, const uint8_t fourCC[4], uint32_t& size)
+ 8ca:	0f 93       	push	r16
+ 8cc:	1f 93       	push	r17
+ 8ce:	cf 93       	push	r28
+ 8d0:	df 93       	push	r29
+ 8d2:	ec 01       	movw	r28, r24
+ 8d4:	8a 01       	movw	r16, r20
+{
+	if (!checkFourCC(pStream, fourCC))
+ 8d6:	c7 df       	rcall	.-114    	; 0x866 <_ZN10WaveParser11checkFourCCEP9SPIStreamPKh>
+ 8d8:	88 23       	and	r24, r24
+ 8da:	41 f0       	breq	.+16     	; 0x8ec <_ZN10WaveParser10readFourCCEP9SPIStreamPKhRm+0x22>
+	{
+		return false;
+	}
+	size = pStream->ReadDoubleWord();
+ 8dc:	ce 01       	movw	r24, r28
+ 8de:	19 d1       	rcall	.+562    	; 0xb12 <_ZN9SPIStream14ReadDoubleWordEv>
+ 8e0:	f8 01       	movw	r30, r16
+ 8e2:	60 83       	st	Z, r22
+ 8e4:	71 83       	std	Z+1, r23	; 0x01
+ 8e6:	82 83       	std	Z+2, r24	; 0x02
+ 8e8:	93 83       	std	Z+3, r25	; 0x03
+ 8ea:	81 e0       	ldi	r24, 0x01	; 1
+	return true;
+}
+ 8ec:	df 91       	pop	r29
+ 8ee:	cf 91       	pop	r28
+ 8f0:	1f 91       	pop	r17
+ 8f2:	0f 91       	pop	r16
+ 8f4:	08 95       	ret
+
+000008f6 <_ZN10WaveParser5ParseEP9SPIStreamR8WaveInfo>:
+static const uint8_t PROGMEM fourCC_WAVE[] = { 'W', 'A', 'V', 'E' };
+static const uint8_t PROGMEM fourCC_FMT[] =  { 'f', 'm', 't', ' ' };
+static const uint8_t PROGMEM fourCC_FACT[] = { 'f', 'a', 'c', 't' };
+static const uint8_t PROGMEM fourCC_DATA[] = { 'd', 'a', 't', 'a' };
+
+bool WaveParser::Parse(SPIStream* pStream, WaveInfo& waveInfo)
+ 8f6:	ef 92       	push	r14
+ 8f8:	ff 92       	push	r15
+ 8fa:	0f 93       	push	r16
+ 8fc:	1f 93       	push	r17
+ 8fe:	df 93       	push	r29
+ 900:	cf 93       	push	r28
+ 902:	cd b7       	in	r28, 0x3d	; 61
+ 904:	de b7       	in	r29, 0x3e	; 62
+ 906:	28 97       	sbiw	r28, 0x08	; 8
+ 908:	0f b6       	in	r0, 0x3f	; 63
+ 90a:	f8 94       	cli
+ 90c:	de bf       	out	0x3e, r29	; 62
+ 90e:	0f be       	out	0x3f, r0	; 63
+ 910:	cd bf       	out	0x3d, r28	; 61
+ 912:	8c 01       	movw	r16, r24
+ 914:	7b 01       	movw	r14, r22
+{
+	if (!readFourCC(pStream, fourCC_RIFF, waveInfo.totalSize))
+ 916:	6e e1       	ldi	r22, 0x1E	; 30
+ 918:	70 e0       	ldi	r23, 0x00	; 0
+ 91a:	a7 01       	movw	r20, r14
+ 91c:	d6 df       	rcall	.-84     	; 0x8ca <_ZN10WaveParser10readFourCCEP9SPIStreamPKhRm>
+ 91e:	88 23       	and	r24, r24
+ 920:	09 f4       	brne	.+2      	; 0x924 <_ZN10WaveParser5ParseEP9SPIStreamR8WaveInfo+0x2e>
+ 922:	6f c0       	rjmp	.+222    	; 0xa02 <_ZN10WaveParser5ParseEP9SPIStreamR8WaveInfo+0x10c>
+	{
+		return false;
+	}
+	waveInfo.totalSize += 8;
+ 924:	f7 01       	movw	r30, r14
+ 926:	80 81       	ld	r24, Z
+ 928:	91 81       	ldd	r25, Z+1	; 0x01
+ 92a:	a2 81       	ldd	r26, Z+2	; 0x02
+ 92c:	b3 81       	ldd	r27, Z+3	; 0x03
+ 92e:	08 96       	adiw	r24, 0x08	; 8
+ 930:	a1 1d       	adc	r26, r1
+ 932:	b1 1d       	adc	r27, r1
+ 934:	80 83       	st	Z, r24
+ 936:	91 83       	std	Z+1, r25	; 0x01
+ 938:	a2 83       	std	Z+2, r26	; 0x02
+ 93a:	b3 83       	std	Z+3, r27	; 0x03
+
+	if (!checkFourCC(pStream, fourCC_WAVE))
+ 93c:	c8 01       	movw	r24, r16
+ 93e:	62 e2       	ldi	r22, 0x22	; 34
+ 940:	70 e0       	ldi	r23, 0x00	; 0
+ 942:	91 df       	rcall	.-222    	; 0x866 <_ZN10WaveParser11checkFourCCEP9SPIStreamPKh>
+ 944:	88 23       	and	r24, r24
+ 946:	09 f4       	brne	.+2      	; 0x94a <_ZN10WaveParser5ParseEP9SPIStreamR8WaveInfo+0x54>
+ 948:	5c c0       	rjmp	.+184    	; 0xa02 <_ZN10WaveParser5ParseEP9SPIStreamR8WaveInfo+0x10c>
+	{
+		return false;
+	}
+
+	uint32_t fmtSize;
+	if (!readFourCC(pStream, fourCC_FMT, fmtSize))
+ 94a:	c8 01       	movw	r24, r16
+ 94c:	66 e2       	ldi	r22, 0x26	; 38
+ 94e:	70 e0       	ldi	r23, 0x00	; 0
+ 950:	ae 01       	movw	r20, r28
+ 952:	4f 5f       	subi	r20, 0xFF	; 255
+ 954:	5f 4f       	sbci	r21, 0xFF	; 255
+ 956:	b9 df       	rcall	.-142    	; 0x8ca <_ZN10WaveParser10readFourCCEP9SPIStreamPKhRm>
+ 958:	88 23       	and	r24, r24
+ 95a:	09 f4       	brne	.+2      	; 0x95e <_ZN10WaveParser5ParseEP9SPIStreamR8WaveInfo+0x68>
+ 95c:	52 c0       	rjmp	.+164    	; 0xa02 <_ZN10WaveParser5ParseEP9SPIStreamR8WaveInfo+0x10c>
+	{
+		return false;
+	}
+
+	waveInfo.formatTag = pStream->ReadWord();
+ 95e:	c8 01       	movw	r24, r16
+ 960:	e6 d0       	rcall	.+460    	; 0xb2e <_ZN9SPIStream8ReadWordEv>
+ 962:	f7 01       	movw	r30, r14
+ 964:	95 83       	std	Z+5, r25	; 0x05
+ 966:	84 83       	std	Z+4, r24	; 0x04
+	waveInfo.channels = pStream->ReadWord();
+ 968:	c8 01       	movw	r24, r16
+ 96a:	e1 d0       	rcall	.+450    	; 0xb2e <_ZN9SPIStream8ReadWordEv>
+ 96c:	f7 01       	movw	r30, r14
+ 96e:	97 83       	std	Z+7, r25	; 0x07
+ 970:	86 83       	std	Z+6, r24	; 0x06
+	waveInfo.samplesPerSec = pStream->ReadDoubleWord();
+ 972:	c8 01       	movw	r24, r16
+ 974:	ce d0       	rcall	.+412    	; 0xb12 <_ZN9SPIStream14ReadDoubleWordEv>
+ 976:	f7 01       	movw	r30, r14
+ 978:	71 87       	std	Z+9, r23	; 0x09
+ 97a:	60 87       	std	Z+8, r22	; 0x08
+	pStream->Skip(4);			// avg bits
+ 97c:	c8 01       	movw	r24, r16
+ 97e:	64 e0       	ldi	r22, 0x04	; 4
+ 980:	70 e0       	ldi	r23, 0x00	; 0
+ 982:	63 d0       	rcall	.+198    	; 0xa4a <_ZN9SPIStream4SkipEj>
+	waveInfo.blockAlign = pStream->ReadWord();
+ 984:	c8 01       	movw	r24, r16
+ 986:	d3 d0       	rcall	.+422    	; 0xb2e <_ZN9SPIStream8ReadWordEv>
+ 988:	f7 01       	movw	r30, r14
+ 98a:	95 87       	std	Z+13, r25	; 0x0d
+ 98c:	84 87       	std	Z+12, r24	; 0x0c
+	waveInfo.bitsPerSample = pStream->ReadWord();
+ 98e:	c8 01       	movw	r24, r16
+ 990:	ce d0       	rcall	.+412    	; 0xb2e <_ZN9SPIStream8ReadWordEv>
+ 992:	f7 01       	movw	r30, r14
+ 994:	93 87       	std	Z+11, r25	; 0x0b
+ 996:	82 87       	std	Z+10, r24	; 0x0a
+
+	pStream->Skip(fmtSize - 16);
+ 998:	69 81       	ldd	r22, Y+1	; 0x01
+ 99a:	7a 81       	ldd	r23, Y+2	; 0x02
+ 99c:	60 51       	subi	r22, 0x10	; 16
+ 99e:	70 40       	sbci	r23, 0x00	; 0
+ 9a0:	c8 01       	movw	r24, r16
+ 9a2:	53 d0       	rcall	.+166    	; 0xa4a <_ZN9SPIStream4SkipEj>
+
+	uint32_t factSize = 0;
+ 9a4:	1d 82       	std	Y+5, r1	; 0x05
+ 9a6:	1e 82       	std	Y+6, r1	; 0x06
+ 9a8:	1f 82       	std	Y+7, r1	; 0x07
+ 9aa:	18 86       	std	Y+8, r1	; 0x08
+	if (readFourCC(pStream, fourCC_FACT, factSize))
+ 9ac:	c8 01       	movw	r24, r16
+ 9ae:	6a e2       	ldi	r22, 0x2A	; 42
+ 9b0:	70 e0       	ldi	r23, 0x00	; 0
+ 9b2:	ae 01       	movw	r20, r28
+ 9b4:	4b 5f       	subi	r20, 0xFB	; 251
+ 9b6:	5f 4f       	sbci	r21, 0xFF	; 255
+ 9b8:	88 df       	rcall	.-240    	; 0x8ca <_ZN10WaveParser10readFourCCEP9SPIStreamPKhRm>
+ 9ba:	88 23       	and	r24, r24
+ 9bc:	11 f0       	breq	.+4      	; 0x9c2 <_ZN10WaveParser5ParseEP9SPIStreamR8WaveInfo+0xcc>
+	{
+		/* waveInfo.totalSamples = */ pStream->ReadDoubleWord();
+ 9be:	c8 01       	movw	r24, r16
+ 9c0:	a8 d0       	rcall	.+336    	; 0xb12 <_ZN9SPIStream14ReadDoubleWordEv>
+	}
+	if (!readFourCC(pStream, fourCC_DATA, waveInfo.dataSize))
+ 9c2:	a7 01       	movw	r20, r14
+ 9c4:	4e 5e       	subi	r20, 0xEE	; 238
+ 9c6:	5f 4f       	sbci	r21, 0xFF	; 255
+ 9c8:	c8 01       	movw	r24, r16
+ 9ca:	6e e2       	ldi	r22, 0x2E	; 46
+ 9cc:	70 e0       	ldi	r23, 0x00	; 0
+ 9ce:	7d df       	rcall	.-262    	; 0x8ca <_ZN10WaveParser10readFourCCEP9SPIStreamPKhRm>
+ 9d0:	88 23       	and	r24, r24
+ 9d2:	b9 f0       	breq	.+46     	; 0xa02 <_ZN10WaveParser5ParseEP9SPIStreamR8WaveInfo+0x10c>
+	{
+		return false;
+	}
+	waveInfo.dataOffset = pStream->GetPosition();
+ 9d4:	c8 01       	movw	r24, r16
+ 9d6:	2f d0       	rcall	.+94     	; 0xa36 <_ZNK9SPIStream11GetPositionEv>
+ 9d8:	f7 01       	movw	r30, r14
+ 9da:	66 8b       	std	Z+22, r22	; 0x16
+ 9dc:	77 8b       	std	Z+23, r23	; 0x17
+ 9de:	80 8f       	std	Z+24, r24	; 0x18
+ 9e0:	91 8f       	std	Z+25, r25	; 0x19
+	waveInfo.blockCount = waveInfo.dataSize / waveInfo.blockAlign;
+ 9e2:	24 85       	ldd	r18, Z+12	; 0x0c
+ 9e4:	35 85       	ldd	r19, Z+13	; 0x0d
+ 9e6:	40 e0       	ldi	r20, 0x00	; 0
+ 9e8:	50 e0       	ldi	r21, 0x00	; 0
+ 9ea:	62 89       	ldd	r22, Z+18	; 0x12
+ 9ec:	73 89       	ldd	r23, Z+19	; 0x13
+ 9ee:	84 89       	ldd	r24, Z+20	; 0x14
+ 9f0:	95 89       	ldd	r25, Z+21	; 0x15
+ 9f2:	b6 d1       	rcall	.+876    	; 0xd60 <__udivmodsi4>
+ 9f4:	f7 01       	movw	r30, r14
+ 9f6:	26 87       	std	Z+14, r18	; 0x0e
+ 9f8:	37 87       	std	Z+15, r19	; 0x0f
+ 9fa:	40 8b       	std	Z+16, r20	; 0x10
+ 9fc:	51 8b       	std	Z+17, r21	; 0x11
+ 9fe:	81 e0       	ldi	r24, 0x01	; 1
+ a00:	01 c0       	rjmp	.+2      	; 0xa04 <_ZN10WaveParser5ParseEP9SPIStreamR8WaveInfo+0x10e>
+	return true;
+ a02:	80 e0       	ldi	r24, 0x00	; 0
+}
+ a04:	28 96       	adiw	r28, 0x08	; 8
+ a06:	0f b6       	in	r0, 0x3f	; 63
+ a08:	f8 94       	cli
+ a0a:	de bf       	out	0x3e, r29	; 62
+ a0c:	0f be       	out	0x3f, r0	; 63
+ a0e:	cd bf       	out	0x3d, r28	; 61
+ a10:	cf 91       	pop	r28
+ a12:	df 91       	pop	r29
+ a14:	1f 91       	pop	r17
+ a16:	0f 91       	pop	r16
+ a18:	ff 90       	pop	r15
+ a1a:	ef 90       	pop	r14
+ a1c:	08 95       	ret
+
+00000a1e <_ZN9SPIStreamC2Ev>:
+#include "SPI.h"
+#include "SPIStream.h"
+
+SPIStream::SPIStream(void)
+ a1e:	fc 01       	movw	r30, r24
+ : m_position(0)
+ a20:	10 82       	st	Z, r1
+ a22:	11 82       	std	Z+1, r1	; 0x01
+ a24:	12 82       	std	Z+2, r1	; 0x02
+ a26:	13 82       	std	Z+3, r1	; 0x03
+{
+}
+ a28:	08 95       	ret
+
+00000a2a <_ZN9SPIStreamC1Ev>:
+#include "SPI.h"
+#include "SPIStream.h"
+
+SPIStream::SPIStream(void)
+ a2a:	fc 01       	movw	r30, r24
+ : m_position(0)
+ a2c:	10 82       	st	Z, r1
+ a2e:	11 82       	std	Z+1, r1	; 0x01
+ a30:	12 82       	std	Z+2, r1	; 0x02
+ a32:	13 82       	std	Z+3, r1	; 0x03
+{
+}
+ a34:	08 95       	ret
+
+00000a36 <_ZNK9SPIStream11GetPositionEv>:
+{
+	m_position = position;
+	SPI_ReadStart(m_position);
+}
+
+uint32_t SPIStream::GetPosition() const
+ a36:	fc 01       	movw	r30, r24
+ a38:	60 81       	ld	r22, Z
+ a3a:	71 81       	ldd	r23, Z+1	; 0x01
+{
+	return m_position;
+}
+ a3c:	82 81       	ldd	r24, Z+2	; 0x02
+ a3e:	93 81       	ldd	r25, Z+3	; 0x03
+ a40:	08 95       	ret
+
+00000a42 <_ZN9SPIStream6WakeupEv>:
+	::SPI_Uninitialize();
+}
+
+void SPIStream::Wakeup()
+{
+	::SPI_Initialize();
+ a42:	47 dc       	rcall	.-1906   	; 0x2d2 <SPI_Initialize>
+}
+ a44:	08 95       	ret
+
+00000a46 <_ZN9SPIStream5SleepEv>:
+	m_position += count;
+}
+
+void SPIStream::Sleep()
+{
+	::SPI_Uninitialize();
+ a46:	52 dc       	rcall	.-1884   	; 0x2ec <SPI_Uninitialize>
+}
+ a48:	08 95       	ret
+
+00000a4a <_ZN9SPIStream4SkipEj>:
+		*buffer++ = SPI_ReadNext();
+	}
+	m_position += count;
+}
+
+void SPIStream::Skip(uint16_t count)
+ a4a:	ef 92       	push	r14
+ a4c:	ff 92       	push	r15
+ a4e:	0f 93       	push	r16
+ a50:	1f 93       	push	r17
+ a52:	cf 93       	push	r28
+ a54:	df 93       	push	r29
+ a56:	7c 01       	movw	r14, r24
+ a58:	8b 01       	movw	r16, r22
+ a5a:	c0 e0       	ldi	r28, 0x00	; 0
+ a5c:	d0 e0       	ldi	r29, 0x00	; 0
+ a5e:	02 c0       	rjmp	.+4      	; 0xa64 <_ZN9SPIStream4SkipEj+0x1a>
+{
+	for (uint16_t i = 0; i < count; ++i)
+	{
+		SPI_ReadNext();
+ a60:	6d dc       	rcall	.-1830   	; 0x33c <SPI_ReadNext>
+	m_position += count;
+}
+
+void SPIStream::Skip(uint16_t count)
+{
+	for (uint16_t i = 0; i < count; ++i)
+ a62:	21 96       	adiw	r28, 0x01	; 1
+ a64:	c0 17       	cp	r28, r16
+ a66:	d1 07       	cpc	r29, r17
+ a68:	d8 f3       	brcs	.-10     	; 0xa60 <_ZN9SPIStream4SkipEj+0x16>
+	{
+		SPI_ReadNext();
+	}
+	m_position += count;
+ a6a:	98 01       	movw	r18, r16
+ a6c:	40 e0       	ldi	r20, 0x00	; 0
+ a6e:	50 e0       	ldi	r21, 0x00	; 0
+ a70:	f7 01       	movw	r30, r14
+ a72:	80 81       	ld	r24, Z
+ a74:	91 81       	ldd	r25, Z+1	; 0x01
+ a76:	a2 81       	ldd	r26, Z+2	; 0x02
+ a78:	b3 81       	ldd	r27, Z+3	; 0x03
+ a7a:	82 0f       	add	r24, r18
+ a7c:	93 1f       	adc	r25, r19
+ a7e:	a4 1f       	adc	r26, r20
+ a80:	b5 1f       	adc	r27, r21
+ a82:	80 83       	st	Z, r24
+ a84:	91 83       	std	Z+1, r25	; 0x01
+ a86:	a2 83       	std	Z+2, r26	; 0x02
+ a88:	b3 83       	std	Z+3, r27	; 0x03
+}
+ a8a:	df 91       	pop	r29
+ a8c:	cf 91       	pop	r28
+ a8e:	1f 91       	pop	r17
+ a90:	0f 91       	pop	r16
+ a92:	ff 90       	pop	r15
+ a94:	ef 90       	pop	r14
+ a96:	08 95       	ret
+
+00000a98 <_ZN9SPIStream4ReadEPhj>:
+{
+	m_position += 4;
+	return ::SPI_ReadNextDoubleWord();
+}
+
+void SPIStream::Read(uint8_t* buffer, uint16_t count)
+ a98:	cf 92       	push	r12
+ a9a:	df 92       	push	r13
+ a9c:	ef 92       	push	r14
+ a9e:	ff 92       	push	r15
+ aa0:	0f 93       	push	r16
+ aa2:	1f 93       	push	r17
+ aa4:	cf 93       	push	r28
+ aa6:	df 93       	push	r29
+ aa8:	6c 01       	movw	r12, r24
+ aaa:	7b 01       	movw	r14, r22
+ aac:	8a 01       	movw	r16, r20
+ aae:	c0 e0       	ldi	r28, 0x00	; 0
+ ab0:	d0 e0       	ldi	r29, 0x00	; 0
+ ab2:	05 c0       	rjmp	.+10     	; 0xabe <_ZN9SPIStream4ReadEPhj+0x26>
+{
+	for (uint16_t i = 0; i < count; ++i)
+	{
+		*buffer++ = SPI_ReadNext();
+ ab4:	43 dc       	rcall	.-1914   	; 0x33c <SPI_ReadNext>
+ ab6:	f7 01       	movw	r30, r14
+ ab8:	81 93       	st	Z+, r24
+ aba:	7f 01       	movw	r14, r30
+	return ::SPI_ReadNextDoubleWord();
+}
+
+void SPIStream::Read(uint8_t* buffer, uint16_t count)
+{
+	for (uint16_t i = 0; i < count; ++i)
+ abc:	21 96       	adiw	r28, 0x01	; 1
+ abe:	c0 17       	cp	r28, r16
+ ac0:	d1 07       	cpc	r29, r17
+ ac2:	c0 f3       	brcs	.-16     	; 0xab4 <_ZN9SPIStream4ReadEPhj+0x1c>
+	{
+		*buffer++ = SPI_ReadNext();
+	}
+	m_position += count;
+ ac4:	98 01       	movw	r18, r16
+ ac6:	40 e0       	ldi	r20, 0x00	; 0
+ ac8:	50 e0       	ldi	r21, 0x00	; 0
+ aca:	f6 01       	movw	r30, r12
+ acc:	80 81       	ld	r24, Z
+ ace:	91 81       	ldd	r25, Z+1	; 0x01
+ ad0:	a2 81       	ldd	r26, Z+2	; 0x02
+ ad2:	b3 81       	ldd	r27, Z+3	; 0x03
+ ad4:	82 0f       	add	r24, r18
+ ad6:	93 1f       	adc	r25, r19
+ ad8:	a4 1f       	adc	r26, r20
+ ada:	b5 1f       	adc	r27, r21
+ adc:	80 83       	st	Z, r24
+ ade:	91 83       	std	Z+1, r25	; 0x01
+ ae0:	a2 83       	std	Z+2, r26	; 0x02
+ ae2:	b3 83       	std	Z+3, r27	; 0x03
+}
+ ae4:	df 91       	pop	r29
+ ae6:	cf 91       	pop	r28
+ ae8:	1f 91       	pop	r17
+ aea:	0f 91       	pop	r16
+ aec:	ff 90       	pop	r15
+ aee:	ef 90       	pop	r14
+ af0:	df 90       	pop	r13
+ af2:	cf 90       	pop	r12
+ af4:	08 95       	ret
+
+00000af6 <_ZN9SPIStream8ReadByteEv>:
+uint32_t SPIStream::GetPosition() const
+{
+	return m_position;
+}
+
+uint8_t SPIStream::ReadByte()
+ af6:	fc 01       	movw	r30, r24
+{
+	m_position++;
+ af8:	80 81       	ld	r24, Z
+ afa:	91 81       	ldd	r25, Z+1	; 0x01
+ afc:	a2 81       	ldd	r26, Z+2	; 0x02
+ afe:	b3 81       	ldd	r27, Z+3	; 0x03
+ b00:	01 96       	adiw	r24, 0x01	; 1
+ b02:	a1 1d       	adc	r26, r1
+ b04:	b1 1d       	adc	r27, r1
+ b06:	80 83       	st	Z, r24
+ b08:	91 83       	std	Z+1, r25	; 0x01
+ b0a:	a2 83       	std	Z+2, r26	; 0x02
+ b0c:	b3 83       	std	Z+3, r27	; 0x03
+	return SPI_ReadNext();
+ b0e:	16 dc       	rcall	.-2004   	; 0x33c <SPI_ReadNext>
+}
+ b10:	08 95       	ret
+
+00000b12 <_ZN9SPIStream14ReadDoubleWordEv>:
+{
+	m_position += 2;
+	return ::SPI_ReadNextWord();
+}
+
+uint32_t SPIStream::ReadDoubleWord()
+ b12:	fc 01       	movw	r30, r24
+{
+	m_position += 4;
+ b14:	80 81       	ld	r24, Z
+ b16:	91 81       	ldd	r25, Z+1	; 0x01
+ b18:	a2 81       	ldd	r26, Z+2	; 0x02
+ b1a:	b3 81       	ldd	r27, Z+3	; 0x03
+ b1c:	04 96       	adiw	r24, 0x04	; 4
+ b1e:	a1 1d       	adc	r26, r1
+ b20:	b1 1d       	adc	r27, r1
+ b22:	80 83       	st	Z, r24
+ b24:	91 83       	std	Z+1, r25	; 0x01
+ b26:	a2 83       	std	Z+2, r26	; 0x02
+ b28:	b3 83       	std	Z+3, r27	; 0x03
+	return ::SPI_ReadNextDoubleWord();
+ b2a:	14 dc       	rcall	.-2008   	; 0x354 <SPI_ReadNextDoubleWord>
+}
+ b2c:	08 95       	ret
+
+00000b2e <_ZN9SPIStream8ReadWordEv>:
+{
+	m_position++;
+	return SPI_ReadNext();
+}
+
+uint16_t SPIStream::ReadWord()
+ b2e:	fc 01       	movw	r30, r24
+{
+	m_position += 2;
+ b30:	80 81       	ld	r24, Z
+ b32:	91 81       	ldd	r25, Z+1	; 0x01
+ b34:	a2 81       	ldd	r26, Z+2	; 0x02
+ b36:	b3 81       	ldd	r27, Z+3	; 0x03
+ b38:	02 96       	adiw	r24, 0x02	; 2
+ b3a:	a1 1d       	adc	r26, r1
+ b3c:	b1 1d       	adc	r27, r1
+ b3e:	80 83       	st	Z, r24
+ b40:	91 83       	std	Z+1, r25	; 0x01
+ b42:	a2 83       	std	Z+2, r26	; 0x02
+ b44:	b3 83       	std	Z+3, r27	; 0x03
+	return ::SPI_ReadNextWord();
+ b46:	ff db       	rcall	.-2050   	; 0x346 <SPI_ReadNextWord>
+}
+ b48:	08 95       	ret
+
+00000b4a <_ZN9SPIStream11SetPositionEm>:
+SPIStream::SPIStream(void)
+ : m_position(0)
+{
+}
+
+void SPIStream::SetPosition(uint32_t position)
+ b4a:	fc 01       	movw	r30, r24
+{
+	m_position = position;
+ b4c:	40 83       	st	Z, r20
+ b4e:	51 83       	std	Z+1, r21	; 0x01
+ b50:	62 83       	std	Z+2, r22	; 0x02
+ b52:	73 83       	std	Z+3, r23	; 0x03
+	SPI_ReadStart(m_position);
+ b54:	cb 01       	movw	r24, r22
+ b56:	ba 01       	movw	r22, r20
+ b58:	e4 db       	rcall	.-2104   	; 0x322 <SPI_ReadStart>
+}
+ b5a:	08 95       	ret
+
+00000b5c <_ZN14PlayControllerC2Ev>:
+#include "WaveParser.h"
+#include "SPI.h"
+#include "Decoder.h"
+#include "PlayController.h"
+
+PlayController::PlayController()
+ b5c:	fc 01       	movw	r30, r24
+ : _state(State_Stop)
+ , _pDecoder(0)
+ b5e:	14 82       	std	Z+4, r1	; 0x04
+ b60:	16 82       	std	Z+6, r1	; 0x06
+ b62:	15 82       	std	Z+5, r1	; 0x05
+{
+}
+ b64:	08 95       	ret
+
+00000b66 <_ZN14PlayControllerC1Ev>:
+#include "WaveParser.h"
+#include "SPI.h"
+#include "Decoder.h"
+#include "PlayController.h"
+
+PlayController::PlayController()
+ b66:	fc 01       	movw	r30, r24
+ : _state(State_Stop)
+ , _pDecoder(0)
+ b68:	14 82       	std	Z+4, r1	; 0x04
+ b6a:	16 82       	std	Z+6, r1	; 0x06
+ b6c:	15 82       	std	Z+5, r1	; 0x05
+{
+}
+ b6e:	08 95       	ret
+
+00000b70 <_ZN14PlayController4StopEv>:
+	OCR0A = value;
+	TCCR0B = prescale;
+	return true;
+}
+
+void PlayController::Stop()
+ b70:	fc 01       	movw	r30, r24
+{
+	_state = State_Stop;
+ b72:	14 82       	std	Z+4, r1	; 0x04
+}
+ b74:	08 95       	ret
+
+00000b76 <_ZNK14PlayController8GetStateEv>:
+
+PlayController::State PlayController::GetState() const
+ b76:	fc 01       	movw	r30, r24
+{
+	return _state;
+ b78:	84 81       	ldd	r24, Z+4	; 0x04
+}
+ b7a:	08 95       	ret
+
+00000b7c <_ZN14PlayController12stopHardwareEv>:
+		}
+		break;
+	}
+}
+
+void PlayController::stopHardware()
+ b7c:	fc 01       	movw	r30, r24
+{
+	_state = State_Stop;
+ b7e:	14 82       	std	Z+4, r1	; 0x04
+	PRR |= _BV(PRTIM1)|_BV(PRTIM0);
+ b80:	80 b5       	in	r24, 0x20	; 32
+ b82:	8c 60       	ori	r24, 0x0C	; 12
+ b84:	80 bd       	out	0x20, r24	; 32
+
+	DDRB &= ~_BV(PB4);
+ b86:	bc 98       	cbi	0x17, 4	; 23
+
+	TCCR1 = 0x00;
+ b88:	10 be       	out	0x30, r1	; 48
+	GTCCR = 0x00;
+ b8a:	1c bc       	out	0x2c, r1	; 44
+	PLLCSR = 0x00;
+ b8c:	17 bc       	out	0x27, r1	; 39
+	TCCR0A = 0x00;
+ b8e:	1a bc       	out	0x2a, r1	; 42
+	TCCR0B = 0x00;
+ b90:	13 be       	out	0x33, r1	; 51
+	TIMSK &= ~_BV(OCIE0A);
+ b92:	89 b7       	in	r24, 0x39	; 57
+ b94:	8f 7e       	andi	r24, 0xEF	; 239
+ b96:	89 bf       	out	0x39, r24	; 57
+}
+ b98:	08 95       	ret
+
+00000b9a <_ZN14PlayController5SleepEv>:
+	::Decoder_Delete(_pDecoder);
+}
+
+void PlayController::Sleep(void)
+{
+	stopHardware();
+ b9a:	f0 df       	rcall	.-32     	; 0xb7c <_ZN14PlayController12stopHardwareEv>
+}
+ b9c:	08 95       	ret
+
+00000b9e <_ZN14PlayController13startHardwareEv>:
+	TCCR0A = 0x00;
+	TCCR0B = 0x00;
+	TIMSK &= ~_BV(OCIE0A);
+}
+
+void PlayController::startHardware()
+ b9e:	fc 01       	movw	r30, r24
+{
+	PRR &= ~(_BV(PRTIM1)|_BV(PRTIM0));
+ ba0:	80 b5       	in	r24, 0x20	; 32
+ ba2:	83 7f       	andi	r24, 0xF3	; 243
+ ba4:	80 bd       	out	0x20, r24	; 32
+
+	//bit7: CTC1
+	//bit6: PWM1A
+	//bit5-4: COM1A (disabled)
+	//bit3-0: prescale (PCK)
+	TCCR1 = _BV(CS10);
+ ba6:	81 e0       	ldi	r24, 0x01	; 1
+ ba8:	80 bf       	out	0x30, r24	; 48
+	//bit5-4: COM1B (OC1B/~OC1B enable)
+	//bit3: force output compare 1B
+	//bit2: force output compare 1A
+	//bit1: PSR1
+	//bit0:
+	GTCCR = _BV(PWM1B) | _BV(COM1B1);
+ baa:	80 e6       	ldi	r24, 0x60	; 96
+ bac:	8c bd       	out	0x2c, r24	; 44
+
+	//bit7: LSM
+	//bit2: PCKE
+	//bit1: PLLE
+	//bit0: PLOCK
+	PLLCSR = _BV(LSM) | _BV(PCKE) | _BV(PLLE) | _BV(PLOCK);
+ bae:	87 e8       	ldi	r24, 0x87	; 135
+ bb0:	87 bd       	out	0x27, r24	; 39
+ bb2:	80 e9       	ldi	r24, 0x90	; 144
+ bb4:	91 e0       	ldi	r25, 0x01	; 1
+ bb6:	01 97       	sbiw	r24, 0x01	; 1
+ bb8:	f1 f7       	brne	.-4      	; 0xbb6 <_ZN14PlayController13startHardwareEv+0x18>
+
+	_delay_us(100);
+
+	while (!(PLLCSR & _BV(PLOCK)))
+ bba:	07 b4       	in	r0, 0x27	; 39
+ bbc:	00 fe       	sbrs	r0, 0
+ bbe:	fd cf       	rjmp	.-6      	; 0xbba <_ZN14PlayController13startHardwareEv+0x1c>
+	//bit7-6: COM0A
+	//bit5-4: COM0B
+	//bit3-2: none
+	//bit1  : WGM01
+	//bit0  : WGM00 (ctc mode)
+	TCCR0A = _BV(WGM01);
+ bc0:	82 e0       	ldi	r24, 0x02	; 2
+ bc2:	8a bd       	out	0x2a, r24	; 42
+
+	OCR1B = 0x80;
+ bc4:	80 e8       	ldi	r24, 0x80	; 128
+ bc6:	8b bd       	out	0x2b, r24	; 43
+
+	TIMSK |= _BV(OCIE0A);
+ bc8:	89 b7       	in	r24, 0x39	; 57
+ bca:	80 61       	ori	r24, 0x10	; 16
+ bcc:	89 bf       	out	0x39, r24	; 57
+
+	//oc1b output
+	DDRB |= _BV(PB4);
+ bce:	bc 9a       	sbi	0x17, 4	; 23
+	_state = State_Play;
+ bd0:	81 e0       	ldi	r24, 0x01	; 1
+ bd2:	84 83       	std	Z+4, r24	; 0x04
+}
+ bd4:	08 95       	ret
+
+00000bd6 <_ZN14PlayController5TimerEv>:
+PlayController::State PlayController::GetState() const
+{
+	return _state;
+}
+
+void PlayController::Timer()
+ bd6:	cf 93       	push	r28
+ bd8:	df 93       	push	r29
+ bda:	ec 01       	movw	r28, r24
+{
+	switch (_state)
+ bdc:	8c 81       	ldd	r24, Y+4	; 0x04
+ bde:	81 30       	cpi	r24, 0x01	; 1
+ be0:	19 f0       	breq	.+6      	; 0xbe8 <_ZN14PlayController5TimerEv+0x12>
+ be2:	82 30       	cpi	r24, 0x02	; 2
+ be4:	09 f5       	brne	.+66     	; 0xc28 <_ZN14PlayController5TimerEv+0x52>
+ be6:	17 c0       	rjmp	.+46     	; 0xc16 <_ZN14PlayController5TimerEv+0x40>
+	{
+	case State_Play:
+		OCR1B = ((uint16_t)(::Decoder_Decode(_pDecoder) & 0xff00) >> 8) ^ 0x80;
+ be8:	8d 81       	ldd	r24, Y+5	; 0x05
+ bea:	9e 81       	ldd	r25, Y+6	; 0x06
+ bec:	0c de       	rcall	.-1000   	; 0x806 <Decoder_Decode>
+ bee:	90 58       	subi	r25, 0x80	; 128
+ bf0:	9b bd       	out	0x2b, r25	; 43
+		if (--_sampleCount == 0)
+ bf2:	88 81       	ld	r24, Y
+ bf4:	99 81       	ldd	r25, Y+1	; 0x01
+ bf6:	aa 81       	ldd	r26, Y+2	; 0x02
+ bf8:	bb 81       	ldd	r27, Y+3	; 0x03
+ bfa:	01 97       	sbiw	r24, 0x01	; 1
+ bfc:	a1 09       	sbc	r26, r1
+ bfe:	b1 09       	sbc	r27, r1
+ c00:	88 83       	st	Y, r24
+ c02:	99 83       	std	Y+1, r25	; 0x01
+ c04:	aa 83       	std	Y+2, r26	; 0x02
+ c06:	bb 83       	std	Y+3, r27	; 0x03
+ c08:	00 97       	sbiw	r24, 0x00	; 0
+ c0a:	a1 05       	cpc	r26, r1
+ c0c:	b1 05       	cpc	r27, r1
+ c0e:	61 f4       	brne	.+24     	; 0xc28 <_ZN14PlayController5TimerEv+0x52>
+		{
+			_state = State_End;
+ c10:	82 e0       	ldi	r24, 0x02	; 2
+ c12:	8c 83       	std	Y+4, r24	; 0x04
+ c14:	09 c0       	rjmp	.+18     	; 0xc28 <_ZN14PlayController5TimerEv+0x52>
+		}
+		break;
+	case State_End:
+		if (OCR1B != 0)
+ c16:	8b b5       	in	r24, 0x2b	; 43
+ c18:	88 23       	and	r24, r24
+ c1a:	21 f0       	breq	.+8      	; 0xc24 <_ZN14PlayController5TimerEv+0x4e>
+		{
+			OCR1B--;
+ c1c:	8b b5       	in	r24, 0x2b	; 43
+ c1e:	81 50       	subi	r24, 0x01	; 1
+ c20:	8b bd       	out	0x2b, r24	; 43
+ c22:	02 c0       	rjmp	.+4      	; 0xc28 <_ZN14PlayController5TimerEv+0x52>
+		}
+		else
+		{
+			stopHardware();
+ c24:	ce 01       	movw	r24, r28
+ c26:	aa df       	rcall	.-172    	; 0xb7c <_ZN14PlayController12stopHardwareEv>
+		}
+		break;
+	}
+}
+ c28:	df 91       	pop	r29
+ c2a:	cf 91       	pop	r28
+ c2c:	08 95       	ret
+
+00000c2e <_ZN14PlayControllerD1Ev>:
+ : _state(State_Stop)
+ , _pDecoder(0)
+{
+}
+
+PlayController::~PlayController()
+ c2e:	0f 93       	push	r16
+ c30:	1f 93       	push	r17
+ c32:	8c 01       	movw	r16, r24
+{
+	stopHardware();
+ c34:	a3 df       	rcall	.-186    	; 0xb7c <_ZN14PlayController12stopHardwareEv>
+	::Decoder_Delete(_pDecoder);
+ c36:	f8 01       	movw	r30, r16
+ c38:	85 81       	ldd	r24, Z+5	; 0x05
+ c3a:	96 81       	ldd	r25, Z+6	; 0x06
+ c3c:	e3 dd       	rcall	.-1082   	; 0x804 <Decoder_Delete>
+}
+ c3e:	1f 91       	pop	r17
+ c40:	0f 91       	pop	r16
+ c42:	08 95       	ret
+
+00000c44 <_ZN14PlayControllerD2Ev>:
+ : _state(State_Stop)
+ , _pDecoder(0)
+{
+}
+
+PlayController::~PlayController()
+ c44:	0f 93       	push	r16
+ c46:	1f 93       	push	r17
+ c48:	8c 01       	movw	r16, r24
+{
+	stopHardware();
+ c4a:	98 df       	rcall	.-208    	; 0xb7c <_ZN14PlayController12stopHardwareEv>
+	::Decoder_Delete(_pDecoder);
+ c4c:	f8 01       	movw	r30, r16
+ c4e:	85 81       	ldd	r24, Z+5	; 0x05
+ c50:	96 81       	ldd	r25, Z+6	; 0x06
+ c52:	d8 dd       	rcall	.-1104   	; 0x804 <Decoder_Delete>
+}
+ c54:	1f 91       	pop	r17
+ c56:	0f 91       	pop	r16
+ c58:	08 95       	ret
+
+00000c5a <_ZN14PlayController4PlayEP9SPIStreamm>:
+void PlayController::Sleep(void)
+{
+	stopHardware();
+}
+
+bool PlayController::Play(SPIStream* pStream, uint32_t offset)
+ c5a:	af 92       	push	r10
+ c5c:	bf 92       	push	r11
+ c5e:	cf 92       	push	r12
+ c60:	df 92       	push	r13
+ c62:	ef 92       	push	r14
+ c64:	ff 92       	push	r15
+ c66:	0f 93       	push	r16
+ c68:	1f 93       	push	r17
+ c6a:	df 93       	push	r29
+ c6c:	cf 93       	push	r28
+ c6e:	cd b7       	in	r28, 0x3d	; 61
+ c70:	de b7       	in	r29, 0x3e	; 62
+ c72:	6a 97       	sbiw	r28, 0x1a	; 26
+ c74:	0f b6       	in	r0, 0x3f	; 63
+ c76:	f8 94       	cli
+ c78:	de bf       	out	0x3e, r29	; 62
+ c7a:	0f be       	out	0x3f, r0	; 63
+ c7c:	cd bf       	out	0x3d, r28	; 61
+ c7e:	6c 01       	movw	r12, r24
+ c80:	5b 01       	movw	r10, r22
+ c82:	79 01       	movw	r14, r18
+ c84:	8a 01       	movw	r16, r20
+{
+	_state = State_Stop;
+ c86:	fc 01       	movw	r30, r24
+ c88:	14 82       	std	Z+4, r1	; 0x04
+	if (_pDecoder != NULL)
+ c8a:	85 81       	ldd	r24, Z+5	; 0x05
+ c8c:	96 81       	ldd	r25, Z+6	; 0x06
+ c8e:	00 97       	sbiw	r24, 0x00	; 0
+ c90:	21 f0       	breq	.+8      	; 0xc9a <_ZN14PlayController4PlayEP9SPIStreamm+0x40>
+	{
+		::Decoder_Delete(_pDecoder);
+ c92:	b8 dd       	rcall	.-1168   	; 0x804 <Decoder_Delete>
+		_pDecoder = NULL;
+ c94:	f6 01       	movw	r30, r12
+ c96:	16 82       	std	Z+6, r1	; 0x06
+ c98:	15 82       	std	Z+5, r1	; 0x05
+	}
+
+	pStream->SetPosition(offset);
+ c9a:	c5 01       	movw	r24, r10
+ c9c:	b8 01       	movw	r22, r16
+ c9e:	a7 01       	movw	r20, r14
+ ca0:	54 df       	rcall	.-344    	; 0xb4a <_ZN9SPIStream11SetPositionEm>
+	WaveInfo waveInfo;
+	if (!WaveParser::Parse(pStream, waveInfo))
+ ca2:	c5 01       	movw	r24, r10
+ ca4:	8e 01       	movw	r16, r28
+ ca6:	0f 5f       	subi	r16, 0xFF	; 255
+ ca8:	1f 4f       	sbci	r17, 0xFF	; 255
+ caa:	b8 01       	movw	r22, r16
+ cac:	24 de       	rcall	.-952    	; 0x8f6 <_ZN10WaveParser5ParseEP9SPIStreamR8WaveInfo>
+ cae:	88 23       	and	r24, r24
+ cb0:	89 f1       	breq	.+98     	; 0xd14 <_ZN14PlayController4PlayEP9SPIStreamm+0xba>
+	{
+		return false;
+	}			
+	_pDecoder = ::Decoder_Create(waveInfo);
+ cb2:	c8 01       	movw	r24, r16
+ cb4:	94 dd       	rcall	.-1240   	; 0x7de <Decoder_Create>
+ cb6:	f6 01       	movw	r30, r12
+ cb8:	96 83       	std	Z+6, r25	; 0x06
+ cba:	85 83       	std	Z+5, r24	; 0x05
+	if (_pDecoder == NULL)
+ cbc:	00 97       	sbiw	r24, 0x00	; 0
+ cbe:	51 f1       	breq	.+84     	; 0xd14 <_ZN14PlayController4PlayEP9SPIStreamm+0xba>
+	{
+		return false;
+	}
+
+	_sampleCount = 	::Decoder_GetTotalSamples(_pDecoder);
+ cc0:	a9 dd       	rcall	.-1198   	; 0x814 <Decoder_GetTotalSamples>
+ cc2:	f6 01       	movw	r30, r12
+ cc4:	60 83       	st	Z, r22
+ cc6:	71 83       	std	Z+1, r23	; 0x01
+ cc8:	82 83       	std	Z+2, r24	; 0x02
+ cca:	93 83       	std	Z+3, r25	; 0x03
+	uint16_t clock = static_cast<uint32_t>(F_CPU + (waveInfo.samplesPerSec / 2)) / waveInfo.samplesPerSec;
+ ccc:	29 85       	ldd	r18, Y+9	; 0x09
+ cce:	3a 85       	ldd	r19, Y+10	; 0x0a
+ cd0:	b9 01       	movw	r22, r18
+ cd2:	76 95       	lsr	r23
+ cd4:	67 95       	ror	r22
+ cd6:	80 e0       	ldi	r24, 0x00	; 0
+ cd8:	90 e0       	ldi	r25, 0x00	; 0
+ cda:	60 50       	subi	r22, 0x00	; 0
+ cdc:	7c 4d       	sbci	r23, 0xDC	; 220
+ cde:	8b 40       	sbci	r24, 0x0B	; 11
+ ce0:	9f 4f       	sbci	r25, 0xFF	; 255
+ ce2:	40 e0       	ldi	r20, 0x00	; 0
+ ce4:	50 e0       	ldi	r21, 0x00	; 0
+ ce6:	3c d0       	rcall	.+120    	; 0xd60 <__udivmodsi4>
+	uint8_t value;
+	uint8_t prescale;
+	if (clock > 255)
+ ce8:	2f 3f       	cpi	r18, 0xFF	; 255
+ cea:	31 05       	cpc	r19, r1
+ cec:	59 f0       	breq	.+22     	; 0xd04 <_ZN14PlayController4PlayEP9SPIStreamm+0xaa>
+ cee:	50 f0       	brcs	.+20     	; 0xd04 <_ZN14PlayController4PlayEP9SPIStreamm+0xaa>
+	{
+		value = (clock + 4) >> 3;
+ cf0:	2c 5f       	subi	r18, 0xFC	; 252
+ cf2:	3f 4f       	sbci	r19, 0xFF	; 255
+ cf4:	83 e0       	ldi	r24, 0x03	; 3
+ cf6:	36 95       	lsr	r19
+ cf8:	27 95       	ror	r18
+ cfa:	8a 95       	dec	r24
+ cfc:	e1 f7       	brne	.-8      	; 0xcf6 <_ZN14PlayController4PlayEP9SPIStreamm+0x9c>
+ cfe:	02 2f       	mov	r16, r18
+ d00:	12 e0       	ldi	r17, 0x02	; 2
+ d02:	02 c0       	rjmp	.+4      	; 0xd08 <_ZN14PlayController4PlayEP9SPIStreamm+0xae>
+		prescale = _BV(CS01);
+	}
+	else
+	{
+		value = clock;
+ d04:	02 2f       	mov	r16, r18
+ d06:	11 e0       	ldi	r17, 0x01	; 1
+		prescale = _BV(CS00);
+	}
+	startHardware();
+ d08:	c6 01       	movw	r24, r12
+ d0a:	49 df       	rcall	.-366    	; 0xb9e <_ZN14PlayController13startHardwareEv>
+	OCR0A = value;
+ d0c:	09 bd       	out	0x29, r16	; 41
+	TCCR0B = prescale;
+ d0e:	13 bf       	out	0x33, r17	; 51
+ d10:	81 e0       	ldi	r24, 0x01	; 1
+ d12:	01 c0       	rjmp	.+2      	; 0xd16 <_ZN14PlayController4PlayEP9SPIStreamm+0xbc>
+	return true;
+ d14:	80 e0       	ldi	r24, 0x00	; 0
+}
+ d16:	6a 96       	adiw	r28, 0x1a	; 26
+ d18:	0f b6       	in	r0, 0x3f	; 63
+ d1a:	f8 94       	cli
+ d1c:	de bf       	out	0x3e, r29	; 62
+ d1e:	0f be       	out	0x3f, r0	; 63
+ d20:	cd bf       	out	0x3d, r28	; 61
+ d22:	cf 91       	pop	r28
+ d24:	df 91       	pop	r29
+ d26:	1f 91       	pop	r17
+ d28:	0f 91       	pop	r16
+ d2a:	ff 90       	pop	r15
+ d2c:	ef 90       	pop	r14
+ d2e:	df 90       	pop	r13
+ d30:	cf 90       	pop	r12
+ d32:	bf 90       	pop	r11
+ d34:	af 90       	pop	r10
+ d36:	08 95       	ret
+
+00000d38 <__udivmodhi4>:
+ d38:	aa 1b       	sub	r26, r26
+ d3a:	bb 1b       	sub	r27, r27
+ d3c:	51 e1       	ldi	r21, 0x11	; 17
+ d3e:	07 c0       	rjmp	.+14     	; 0xd4e <__udivmodhi4_ep>
+
+00000d40 <__udivmodhi4_loop>:
+ d40:	aa 1f       	adc	r26, r26
+ d42:	bb 1f       	adc	r27, r27
+ d44:	a6 17       	cp	r26, r22
+ d46:	b7 07       	cpc	r27, r23
+ d48:	10 f0       	brcs	.+4      	; 0xd4e <__udivmodhi4_ep>
+ d4a:	a6 1b       	sub	r26, r22
+ d4c:	b7 0b       	sbc	r27, r23
+
+00000d4e <__udivmodhi4_ep>:
+ d4e:	88 1f       	adc	r24, r24
+ d50:	99 1f       	adc	r25, r25
+ d52:	5a 95       	dec	r21
+ d54:	a9 f7       	brne	.-22     	; 0xd40 <__udivmodhi4_loop>
+ d56:	80 95       	com	r24
+ d58:	90 95       	com	r25
+ d5a:	bc 01       	movw	r22, r24
+ d5c:	cd 01       	movw	r24, r26
+ d5e:	08 95       	ret
+
+00000d60 <__udivmodsi4>:
+ d60:	a1 e2       	ldi	r26, 0x21	; 33
+ d62:	1a 2e       	mov	r1, r26
+ d64:	aa 1b       	sub	r26, r26
+ d66:	bb 1b       	sub	r27, r27
+ d68:	fd 01       	movw	r30, r26
+ d6a:	0d c0       	rjmp	.+26     	; 0xd86 <__udivmodsi4_ep>
+
+00000d6c <__udivmodsi4_loop>:
+ d6c:	aa 1f       	adc	r26, r26
+ d6e:	bb 1f       	adc	r27, r27
+ d70:	ee 1f       	adc	r30, r30
+ d72:	ff 1f       	adc	r31, r31
+ d74:	a2 17       	cp	r26, r18
+ d76:	b3 07       	cpc	r27, r19
+ d78:	e4 07       	cpc	r30, r20
+ d7a:	f5 07       	cpc	r31, r21
+ d7c:	20 f0       	brcs	.+8      	; 0xd86 <__udivmodsi4_ep>
+ d7e:	a2 1b       	sub	r26, r18
+ d80:	b3 0b       	sbc	r27, r19
+ d82:	e4 0b       	sbc	r30, r20
+ d84:	f5 0b       	sbc	r31, r21
+
+00000d86 <__udivmodsi4_ep>:
+ d86:	66 1f       	adc	r22, r22
+ d88:	77 1f       	adc	r23, r23
+ d8a:	88 1f       	adc	r24, r24
+ d8c:	99 1f       	adc	r25, r25
+ d8e:	1a 94       	dec	r1
+ d90:	69 f7       	brne	.-38     	; 0xd6c <__udivmodsi4_loop>
+ d92:	60 95       	com	r22
+ d94:	70 95       	com	r23
+ d96:	80 95       	com	r24
+ d98:	90 95       	com	r25
+ d9a:	9b 01       	movw	r18, r22
+ d9c:	ac 01       	movw	r20, r24
+ d9e:	bd 01       	movw	r22, r26
+ da0:	cf 01       	movw	r24, r30
+ da2:	08 95       	ret
+
+00000da4 <__tablejump2__>:
+ da4:	ee 0f       	add	r30, r30
+ da6:	ff 1f       	adc	r31, r31
+
+00000da8 <__tablejump__>:
+ da8:	05 90       	lpm	r0, Z+
+ daa:	f4 91       	lpm	r31, Z+
+ dac:	e0 2d       	mov	r30, r0
+ dae:	09 94       	ijmp
+
+00000db0 <malloc>:
+ db0:	cf 93       	push	r28
+ db2:	df 93       	push	r29
+ db4:	bc 01       	movw	r22, r24
+ db6:	82 30       	cpi	r24, 0x02	; 2
+ db8:	91 05       	cpc	r25, r1
+ dba:	10 f4       	brcc	.+4      	; 0xdc0 <malloc+0x10>
+ dbc:	62 e0       	ldi	r22, 0x02	; 2
+ dbe:	70 e0       	ldi	r23, 0x00	; 0
+ dc0:	a0 91 78 00 	lds	r26, 0x0078
+ dc4:	b0 91 79 00 	lds	r27, 0x0079
+ dc8:	ed 01       	movw	r28, r26
+ dca:	e0 e0       	ldi	r30, 0x00	; 0
+ dcc:	f0 e0       	ldi	r31, 0x00	; 0
+ dce:	40 e0       	ldi	r20, 0x00	; 0
+ dd0:	50 e0       	ldi	r21, 0x00	; 0
+ dd2:	21 c0       	rjmp	.+66     	; 0xe16 <malloc+0x66>
+ dd4:	88 81       	ld	r24, Y
+ dd6:	99 81       	ldd	r25, Y+1	; 0x01
+ dd8:	86 17       	cp	r24, r22
+ dda:	97 07       	cpc	r25, r23
+ ddc:	69 f4       	brne	.+26     	; 0xdf8 <malloc+0x48>
+ dde:	8a 81       	ldd	r24, Y+2	; 0x02
+ de0:	9b 81       	ldd	r25, Y+3	; 0x03
+ de2:	30 97       	sbiw	r30, 0x00	; 0
+ de4:	19 f0       	breq	.+6      	; 0xdec <malloc+0x3c>
+ de6:	93 83       	std	Z+3, r25	; 0x03
+ de8:	82 83       	std	Z+2, r24	; 0x02
+ dea:	04 c0       	rjmp	.+8      	; 0xdf4 <malloc+0x44>
+ dec:	90 93 79 00 	sts	0x0079, r25
+ df0:	80 93 78 00 	sts	0x0078, r24
+ df4:	fe 01       	movw	r30, r28
+ df6:	34 c0       	rjmp	.+104    	; 0xe60 <malloc+0xb0>
+ df8:	68 17       	cp	r22, r24
+ dfa:	79 07       	cpc	r23, r25
+ dfc:	38 f4       	brcc	.+14     	; 0xe0c <malloc+0x5c>
+ dfe:	41 15       	cp	r20, r1
+ e00:	51 05       	cpc	r21, r1
+ e02:	19 f0       	breq	.+6      	; 0xe0a <malloc+0x5a>
+ e04:	84 17       	cp	r24, r20
+ e06:	95 07       	cpc	r25, r21
+ e08:	08 f4       	brcc	.+2      	; 0xe0c <malloc+0x5c>
+ e0a:	ac 01       	movw	r20, r24
+ e0c:	fe 01       	movw	r30, r28
+ e0e:	8a 81       	ldd	r24, Y+2	; 0x02
+ e10:	9b 81       	ldd	r25, Y+3	; 0x03
+ e12:	9c 01       	movw	r18, r24
+ e14:	e9 01       	movw	r28, r18
+ e16:	20 97       	sbiw	r28, 0x00	; 0
+ e18:	e9 f6       	brne	.-70     	; 0xdd4 <malloc+0x24>
+ e1a:	41 15       	cp	r20, r1
+ e1c:	51 05       	cpc	r21, r1
+ e1e:	a9 f1       	breq	.+106    	; 0xe8a <malloc+0xda>
+ e20:	ca 01       	movw	r24, r20
+ e22:	86 1b       	sub	r24, r22
+ e24:	97 0b       	sbc	r25, r23
+ e26:	04 97       	sbiw	r24, 0x04	; 4
+ e28:	08 f4       	brcc	.+2      	; 0xe2c <malloc+0x7c>
+ e2a:	ba 01       	movw	r22, r20
+ e2c:	e0 e0       	ldi	r30, 0x00	; 0
+ e2e:	f0 e0       	ldi	r31, 0x00	; 0
+ e30:	2a c0       	rjmp	.+84     	; 0xe86 <malloc+0xd6>
+ e32:	8d 91       	ld	r24, X+
+ e34:	9c 91       	ld	r25, X
+ e36:	11 97       	sbiw	r26, 0x01	; 1
+ e38:	84 17       	cp	r24, r20
+ e3a:	95 07       	cpc	r25, r21
+ e3c:	f9 f4       	brne	.+62     	; 0xe7c <malloc+0xcc>
+ e3e:	64 17       	cp	r22, r20
+ e40:	75 07       	cpc	r23, r21
+ e42:	81 f4       	brne	.+32     	; 0xe64 <malloc+0xb4>
+ e44:	12 96       	adiw	r26, 0x02	; 2
+ e46:	8d 91       	ld	r24, X+
+ e48:	9c 91       	ld	r25, X
+ e4a:	13 97       	sbiw	r26, 0x03	; 3
+ e4c:	30 97       	sbiw	r30, 0x00	; 0
+ e4e:	19 f0       	breq	.+6      	; 0xe56 <malloc+0xa6>
+ e50:	93 83       	std	Z+3, r25	; 0x03
+ e52:	82 83       	std	Z+2, r24	; 0x02
+ e54:	04 c0       	rjmp	.+8      	; 0xe5e <malloc+0xae>
+ e56:	90 93 79 00 	sts	0x0079, r25
+ e5a:	80 93 78 00 	sts	0x0078, r24
+ e5e:	fd 01       	movw	r30, r26
+ e60:	32 96       	adiw	r30, 0x02	; 2
+ e62:	4f c0       	rjmp	.+158    	; 0xf02 <malloc+0x152>
+ e64:	ca 01       	movw	r24, r20
+ e66:	86 1b       	sub	r24, r22
+ e68:	97 0b       	sbc	r25, r23
+ e6a:	fd 01       	movw	r30, r26
+ e6c:	e8 0f       	add	r30, r24
+ e6e:	f9 1f       	adc	r31, r25
+ e70:	61 93       	st	Z+, r22
+ e72:	71 93       	st	Z+, r23
+ e74:	02 97       	sbiw	r24, 0x02	; 2
+ e76:	8d 93       	st	X+, r24
+ e78:	9c 93       	st	X, r25
+ e7a:	43 c0       	rjmp	.+134    	; 0xf02 <malloc+0x152>
+ e7c:	fd 01       	movw	r30, r26
+ e7e:	82 81       	ldd	r24, Z+2	; 0x02
+ e80:	93 81       	ldd	r25, Z+3	; 0x03
+ e82:	9c 01       	movw	r18, r24
+ e84:	d9 01       	movw	r26, r18
+ e86:	10 97       	sbiw	r26, 0x00	; 0
+ e88:	a1 f6       	brne	.-88     	; 0xe32 <malloc+0x82>
+ e8a:	80 91 76 00 	lds	r24, 0x0076
+ e8e:	90 91 77 00 	lds	r25, 0x0077
+ e92:	89 2b       	or	r24, r25
+ e94:	41 f4       	brne	.+16     	; 0xea6 <malloc+0xf6>
+ e96:	80 91 64 00 	lds	r24, 0x0064
+ e9a:	90 91 65 00 	lds	r25, 0x0065
+ e9e:	90 93 77 00 	sts	0x0077, r25
+ ea2:	80 93 76 00 	sts	0x0076, r24
+ ea6:	40 91 66 00 	lds	r20, 0x0066
+ eaa:	50 91 67 00 	lds	r21, 0x0067
+ eae:	41 15       	cp	r20, r1
+ eb0:	51 05       	cpc	r21, r1
+ eb2:	41 f4       	brne	.+16     	; 0xec4 <malloc+0x114>
+ eb4:	4d b7       	in	r20, 0x3d	; 61
+ eb6:	5e b7       	in	r21, 0x3e	; 62
+ eb8:	80 91 62 00 	lds	r24, 0x0062
+ ebc:	90 91 63 00 	lds	r25, 0x0063
+ ec0:	48 1b       	sub	r20, r24
+ ec2:	59 0b       	sbc	r21, r25
+ ec4:	20 91 76 00 	lds	r18, 0x0076
+ ec8:	30 91 77 00 	lds	r19, 0x0077
+ ecc:	24 17       	cp	r18, r20
+ ece:	35 07       	cpc	r19, r21
+ ed0:	b0 f4       	brcc	.+44     	; 0xefe <malloc+0x14e>
+ ed2:	ca 01       	movw	r24, r20
+ ed4:	82 1b       	sub	r24, r18
+ ed6:	93 0b       	sbc	r25, r19
+ ed8:	86 17       	cp	r24, r22
+ eda:	97 07       	cpc	r25, r23
+ edc:	80 f0       	brcs	.+32     	; 0xefe <malloc+0x14e>
+ ede:	ab 01       	movw	r20, r22
+ ee0:	4e 5f       	subi	r20, 0xFE	; 254
+ ee2:	5f 4f       	sbci	r21, 0xFF	; 255
+ ee4:	84 17       	cp	r24, r20
+ ee6:	95 07       	cpc	r25, r21
+ ee8:	50 f0       	brcs	.+20     	; 0xefe <malloc+0x14e>
+ eea:	42 0f       	add	r20, r18
+ eec:	53 1f       	adc	r21, r19
+ eee:	50 93 77 00 	sts	0x0077, r21
+ ef2:	40 93 76 00 	sts	0x0076, r20
+ ef6:	f9 01       	movw	r30, r18
+ ef8:	61 93       	st	Z+, r22
+ efa:	71 93       	st	Z+, r23
+ efc:	02 c0       	rjmp	.+4      	; 0xf02 <malloc+0x152>
+ efe:	e0 e0       	ldi	r30, 0x00	; 0
+ f00:	f0 e0       	ldi	r31, 0x00	; 0
+ f02:	cf 01       	movw	r24, r30
+ f04:	df 91       	pop	r29
+ f06:	cf 91       	pop	r28
+ f08:	08 95       	ret
+
+00000f0a <free>:
+ f0a:	cf 93       	push	r28
+ f0c:	df 93       	push	r29
+ f0e:	00 97       	sbiw	r24, 0x00	; 0
+ f10:	09 f4       	brne	.+2      	; 0xf14 <free+0xa>
+ f12:	50 c0       	rjmp	.+160    	; 0xfb4 <free+0xaa>
+ f14:	ec 01       	movw	r28, r24
+ f16:	22 97       	sbiw	r28, 0x02	; 2
+ f18:	1b 82       	std	Y+3, r1	; 0x03
+ f1a:	1a 82       	std	Y+2, r1	; 0x02
+ f1c:	a0 91 78 00 	lds	r26, 0x0078
+ f20:	b0 91 79 00 	lds	r27, 0x0079
+ f24:	10 97       	sbiw	r26, 0x00	; 0
+ f26:	09 f1       	breq	.+66     	; 0xf6a <free+0x60>
+ f28:	40 e0       	ldi	r20, 0x00	; 0
+ f2a:	50 e0       	ldi	r21, 0x00	; 0
+ f2c:	ac 17       	cp	r26, r28
+ f2e:	bd 07       	cpc	r27, r29
+ f30:	08 f1       	brcs	.+66     	; 0xf74 <free+0x6a>
+ f32:	bb 83       	std	Y+3, r27	; 0x03
+ f34:	aa 83       	std	Y+2, r26	; 0x02
+ f36:	fe 01       	movw	r30, r28
+ f38:	21 91       	ld	r18, Z+
+ f3a:	31 91       	ld	r19, Z+
+ f3c:	e2 0f       	add	r30, r18
+ f3e:	f3 1f       	adc	r31, r19
+ f40:	ae 17       	cp	r26, r30
+ f42:	bf 07       	cpc	r27, r31
+ f44:	79 f4       	brne	.+30     	; 0xf64 <free+0x5a>
+ f46:	8d 91       	ld	r24, X+
+ f48:	9c 91       	ld	r25, X
+ f4a:	11 97       	sbiw	r26, 0x01	; 1
+ f4c:	28 0f       	add	r18, r24
+ f4e:	39 1f       	adc	r19, r25
+ f50:	2e 5f       	subi	r18, 0xFE	; 254
+ f52:	3f 4f       	sbci	r19, 0xFF	; 255
+ f54:	39 83       	std	Y+1, r19	; 0x01
+ f56:	28 83       	st	Y, r18
+ f58:	12 96       	adiw	r26, 0x02	; 2
+ f5a:	8d 91       	ld	r24, X+
+ f5c:	9c 91       	ld	r25, X
+ f5e:	13 97       	sbiw	r26, 0x03	; 3
+ f60:	9b 83       	std	Y+3, r25	; 0x03
+ f62:	8a 83       	std	Y+2, r24	; 0x02
+ f64:	41 15       	cp	r20, r1
+ f66:	51 05       	cpc	r21, r1
+ f68:	71 f4       	brne	.+28     	; 0xf86 <free+0x7c>
+ f6a:	d0 93 79 00 	sts	0x0079, r29
+ f6e:	c0 93 78 00 	sts	0x0078, r28
+ f72:	20 c0       	rjmp	.+64     	; 0xfb4 <free+0xaa>
+ f74:	12 96       	adiw	r26, 0x02	; 2
+ f76:	8d 91       	ld	r24, X+
+ f78:	9c 91       	ld	r25, X
+ f7a:	13 97       	sbiw	r26, 0x03	; 3
+ f7c:	ad 01       	movw	r20, r26
+ f7e:	00 97       	sbiw	r24, 0x00	; 0
+ f80:	11 f0       	breq	.+4      	; 0xf86 <free+0x7c>
+ f82:	dc 01       	movw	r26, r24
+ f84:	d3 cf       	rjmp	.-90     	; 0xf2c <free+0x22>
+ f86:	fa 01       	movw	r30, r20
+ f88:	d3 83       	std	Z+3, r29	; 0x03
+ f8a:	c2 83       	std	Z+2, r28	; 0x02
+ f8c:	21 91       	ld	r18, Z+
+ f8e:	31 91       	ld	r19, Z+
+ f90:	e2 0f       	add	r30, r18
+ f92:	f3 1f       	adc	r31, r19
+ f94:	ce 17       	cp	r28, r30
+ f96:	df 07       	cpc	r29, r31
+ f98:	69 f4       	brne	.+26     	; 0xfb4 <free+0xaa>
+ f9a:	88 81       	ld	r24, Y
+ f9c:	99 81       	ldd	r25, Y+1	; 0x01
+ f9e:	28 0f       	add	r18, r24
+ fa0:	39 1f       	adc	r19, r25
+ fa2:	2e 5f       	subi	r18, 0xFE	; 254
+ fa4:	3f 4f       	sbci	r19, 0xFF	; 255
+ fa6:	fa 01       	movw	r30, r20
+ fa8:	31 83       	std	Z+1, r19	; 0x01
+ faa:	20 83       	st	Z, r18
+ fac:	8a 81       	ldd	r24, Y+2	; 0x02
+ fae:	9b 81       	ldd	r25, Y+3	; 0x03
+ fb0:	93 83       	std	Z+3, r25	; 0x03
+ fb2:	82 83       	std	Z+2, r24	; 0x02
+ fb4:	df 91       	pop	r29
+ fb6:	cf 91       	pop	r28
+ fb8:	08 95       	ret
+
+00000fba <__do_global_dtors>:
+ fba:	10 e0       	ldi	r17, 0x00	; 0
+ fbc:	c4 e3       	ldi	r28, 0x34	; 52
+ fbe:	d0 e0       	ldi	r29, 0x00	; 0
+ fc0:	03 c0       	rjmp	.+6      	; 0xfc8 <.do_global_dtors_start>
+
+00000fc2 <.do_global_dtors_loop>:
+ fc2:	fe 01       	movw	r30, r28
+ fc4:	f1 de       	rcall	.-542    	; 0xda8 <__tablejump__>
+ fc6:	22 96       	adiw	r28, 0x02	; 2
+
+00000fc8 <.do_global_dtors_start>:
+ fc8:	c6 33       	cpi	r28, 0x36	; 54
+ fca:	d1 07       	cpc	r29, r17
+ fcc:	d1 f7       	brne	.-12     	; 0xfc2 <.do_global_dtors_loop>
+ fce:	f8 94       	cli
+
+00000fd0 <__stop_program>:
+ fd0:	ff cf       	rjmp	.-2      	; 0xfd0 <__stop_program>
